@@ -1,14 +1,40 @@
 <ion-header>
+
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>{{ title }}</ion-title>
+
+    <ion-buttons end>
+      <button ion-button icon-only (click)="generateRandomEvents()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+
   </ion-navbar>
+
+  <ion-toolbar>
+
+    <ion-segment [(ngModel)]="calendarMode">
+
+      <ion-segment-button value="day">Day</ion-segment-button>
+      <ion-segment-button value="week">Week</ion-segment-button>
+      <ion-segment-button value="month">Month</ion-segment-button>
+
+    </ion-segment>
+
+  </ion-toolbar>
+
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+
+<ion-content>
+
+  <calendar [eventSource]="eventSource" [calendarMode]="calendarMode" [currentDate]="currentDate" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onRangeChanged)="reloadSource(startTime, endTime)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onTitleChanged($event)"
+    (onTimeSelected)="onTimeSelected($event)" step="30"></calendar>
+
 </ion-content>

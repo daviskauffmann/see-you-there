@@ -1,0 +1,31 @@
+<ion-content padding class="background">
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="person" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
+  </ion-item>
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="mail" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="lock" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="lock" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="password" placeholder="Confirm Password" [(ngModel)]="password2"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <button ion-button block round color="light" (click)="signUp()">Sign Up</button>
+
+  <button ion-button block clear color="light" (click)="cancel()">Cancel</button>
+
+  <p *ngIf="error" style="color: #f53d3d">{{ error }}</p>
+
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-content padding class="background">
+
+  <ion-row>
+    <ion-col></ion-col>
+    <ion-col col-8>
+      <img src="http://placehold.it/300x200" />
+    </ion-col>
+    <ion-col></ion-col>
+  </ion-row>
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="mail" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item class="transparent">
+    <ion-icon item-left name="lock" color="light"></ion-icon>
+    <ion-input required style="color: #f4f4f4" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <br>
+
+  <button ion-button block round color="light" (click)="signIn()">Sign In</button>
+
+  <ion-row>
+    <ion-col>
+      <button ion-button small block clear color="light" (click)="forgotPassword()">Forgot Password?</button>
+    </ion-col>
+    <ion-col></ion-col>
+    <ion-col>
+      <button ion-button small block clear color="light" (click)="signUp()">Sign Up!</button>
+    </ion-col>
+  </ion-row>
+
+  <p *ngIf="error" style="color: #f53d3d">{{ error }}</p>
+
+  <!--button ion-button block icon-left color="google" (click)="signIn()"><ion-icon name="google"></ion-icon>Sign In With Google</button>
+  <button ion-button block icon-left color="facebook" (click)="signIn()"><ion-icon name="facebook"></ion-icon>Sign In With Facebook</button>
+  <button ion-button block icon-left color="twitter" (click)="signIn()"><ion-icon name="twitter"></ion-icon>Sign In With Twitter</button-->
+
+</ion-content>
