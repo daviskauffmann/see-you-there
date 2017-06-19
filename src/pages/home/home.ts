@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -11,70 +13,84 @@ export class HomePage {
   eventSource: Array<any> = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
+  events: FirebaseListObservable<Array<any>>;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams) { }
+    public navParams: NavParams,
+    public afDB: AngularFireDatabase) {
+    this.events = this.afDB.list('/events');
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    this.events.subscribe((events: Array<any>) => {
+      this.eventSource = [];
+      
+      events.forEach((event: any) => {
+        event.startTime = new Date(event.startTime);
+        event.endTime = new Date(event.endTime);
+        this.eventSource.push(event);
+      });
+    });
   }
 
   generateRandomEvents(): void {
-    this.eventSource = [];
+    this.eventSource.forEach((event: any) => {
+      this.events.remove(event.$key);
+    });
+
+    const events: Array<any> = [];
     for (var i = 0; i < 50; i++) {
       var date = new Date();
       var eventType = Math.floor(Math.random() * 2);
       var startDay = Math.floor(Math.random() * 90) - 45;
       var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
+
       if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
         if (endDay === startDay) {
           endDay++;
         }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
-        this.eventSource.push({
-          title: 'All Day - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: true
+
+        events.push({
+          title: `All Day - ${i}`,
+          startTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay)).toString(),
+          endTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay)).toString(),
+          allDay: true,
+          category: 'Stuff'
         });
       } else {
         var startMinute = Math.floor(Math.random() * 24 * 60);
         var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
-        this.eventSource.push({
-          title: 'Event - ' + i,
-          startTime: startTime,
-          endTime: endTime,
-          allDay: false
+
+        events.push({
+          title: `Event - ${i}`,
+          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute).toString(),
+          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute).toString(),
+          allDay: false,
+          category: 'Things'
         });
       }
     }
+
+    events.forEach((event: any) => {
+      this.events.push(event);
+    });
   }
 
-  onCurrentDateChanged($event): void {
-    console.log($event);
+  onCurrentDateChanged(ev): void {
+    
   }
 
-  reloadSource(startTime, endTime): void {
-    console.log(startTime);
-    console.log(endTime);
+  reloadSource(startTime: Date, endTime: Date): void {
+    
   }
 
-  onTitleChanged($event): void {
-    console.log($event);
-
-    this.title = $event;
+  onTitleChanged(title: string): void {
+    this.title = title;
   }
 
-  onEventSelected($event): void {
-    console.log($event);
+  onEventSelected(ev): void {
+    console.log(ev);
   }
 
-  onTimeSelected($event): void {
-    console.log($event);
+  onTimeSelected(ev): void {
+    
   }
 }

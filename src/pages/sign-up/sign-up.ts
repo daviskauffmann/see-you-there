@@ -23,10 +23,6 @@ export class SignUpPage {
     this.password = this.navParams.data.password;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
-  }
-
   signUp(): void {
     if (!this.name) {
       this.error = 'Name required';
@@ -50,22 +46,14 @@ export class SignUpPage {
 
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
       .then((res: User) => {
-        console.log(res);
-
-        res.sendEmailVerification()
-          .then(console.log)
-          .catch(console.error);
+        res.sendEmailVerification();
 
         this.navCtrl.setRoot('HomePage', {}, {
           animate: true,
           direction: 'forward'
-        })
-          .then(console.log)
-          .catch(console.error);
+        });
       })
-      .catch(err => {
-        console.error(err);
-
+      .catch((err: Error) => {
         this.error = err.message;
       });
   }
@@ -74,8 +62,6 @@ export class SignUpPage {
     this.navCtrl.setRoot('SignInPage', {}, {
       animate: true,
       direction: 'back'
-    })
-      .then(console.log)
-      .catch(console.error);
+    });
   }
 }

@@ -18,25 +18,15 @@ export class SignInPage {
     public navParams: NavParams,
     public afAuth: AngularFireAuth) { }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignInPage');
-  }
-
   signIn(): void {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-      .then(res => {
-        console.log(res);
-
+      .then(() => {
         this.navCtrl.setRoot('HomePage', {}, {
           animate: true,
           direction: 'forward'
-        })
-          .then(console.log)
-          .catch(console.error);
+        });
       })
-      .catch(err => {
-        console.error(err);
-
+      .catch((err: Error) => {
         this.error = err.message;
       });
   }
@@ -48,36 +38,25 @@ export class SignInPage {
     }, {
       animate: true,
       direction: 'forward'
-    })
-      .then(console.log)
-      .catch(console.error);
+    });
   }
 
   forgotPassword(): void {
     this.afAuth.auth.sendPasswordResetEmail(this.email)
-      .then(console.log)
-      .catch(err => {
-        console.error(err);
-
+      .catch((err: Error) => {
         this.error = err.message;
       });
   }
 
   signInWithGoogle(): void {
-    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-      .then(console.log)
-      .catch(console.error);
+    this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
   signInWithFacebook(): void {
-    this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider())
-      .then(console.log)
-      .catch(console.error);
+    this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
   }
 
   signInWithTwitter(): void {
-    this.afAuth.auth.signInWithPopup(new auth.TwitterAuthProvider())
-      .then(console.log)
-      .catch(console.error);
+    this.afAuth.auth.signInWithPopup(new auth.TwitterAuthProvider());
   }
 }

@@ -27,57 +27,40 @@ export class MyApp {
     });
 
     this.afAuth.auth.onAuthStateChanged((user: User) => {
-      console.log(user);
-
       if (user) {
         this.rootPage = 'HomePage';
       }
-    }, console.error);
+    });
   }
 
   updateProfile(): void {
     this.afAuth.auth.currentUser.updateProfile({
       displayName: '',
       photoURL: ''
-    })
-      .then(console.log)
-      .catch(console.error);
+    });
   }
 
   updateEmail(): void {
-    this.afAuth.auth.currentUser.updateEmail('')
-      .then(console.log)
-      .catch(console.error);
+    this.afAuth.auth.currentUser.updateEmail('');
   }
 
   updatePassword(): void {
-    this.afAuth.auth.currentUser.updatePassword('')
-      .then(console.log)
-      .catch(console.error);
+    this.afAuth.auth.currentUser.updatePassword('');
   }
 
   resendVerification(): void {
-    if (this.afAuth.auth.currentUser.emailVerified) {
-      console.log('Already verified');
-    } else {
-      this.afAuth.auth.currentUser.sendEmailVerification()
-        .then(console.log)
-        .catch(console.error);
+    if (!this.afAuth.auth.currentUser.emailVerified) {
+      this.afAuth.auth.currentUser.sendEmailVerification();
     }
   }
 
   signOut(): void {
     this.afAuth.auth.signOut()
-      .then(res => {
-        console.log(res);
-
+      .then(() => {
         this.nav.setRoot('SignInPage', {}, {
           animate: true,
           direction: 'back'
-        })
-          .then(console.log)
-          .catch(console.error);
-      })
-      .catch(console.error);
+        });
+      });
   }
 }
