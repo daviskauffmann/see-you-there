@@ -13,12 +13,12 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgCalendarModule } from 'ionic2-calendar';
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyC313ovfR83k7pQjoBpKf8HFG6_wAQ8nLw",
-  authDomain: "see-you-there-2255a.firebaseapp.com",
-  databaseURL: "https://see-you-there-2255a.firebaseio.com",
-  projectId: "see-you-there-2255a",
-  storageBucket: "see-you-there-2255a.appspot.com",
-  messagingSenderId: "1019879395510"
+  apiKey: 'AIzaSyC313ovfR83k7pQjoBpKf8HFG6_wAQ8nLw',
+  authDomain: 'see-you-there-2255a.firebaseapp.com',
+  databaseURL: 'https://see-you-there-2255a.firebaseio.com',
+  projectId: 'see-you-there-2255a',
+  storageBucket: 'see-you-there-2255a.appspot.com',
+  messagingSenderId: '1019879395510'
 };
 
 @NgModule({

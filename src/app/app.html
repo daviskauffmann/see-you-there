@@ -2,12 +2,20 @@
 
   <ion-content>
 
-    <ion-list>
+    <ion-list *ngIf="afAuth.auth.currentUser && afAuth.auth.currentUser.isAnonymous">
+
+      <button ion-item (click)="upgradeAccount()">Upgrade Account</button>
+      <button ion-item menuToggle (click)="signOut()">Sign Out</button>
+
+    </ion-list>
+
+    <ion-list *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous">
 
       <button ion-item (click)="updateProfile()">Update Profile</button>
       <button ion-item (click)="updateEmail()">Update Email</button>
       <button ion-item (click)="updatePassword()">Update Password</button>
       <button ion-item (click)="resendVerification()">Resend Verification</button>
+      <button ion-item menuToggle (click)="deleteAccount()">Delete Account</button>
       <button ion-item menuToggle (click)="signOut()">Sign Out</button>
 
     </ion-list>

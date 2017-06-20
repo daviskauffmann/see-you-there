@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase/app';
@@ -10,6 +10,8 @@ import { User } from 'firebase/app';
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
+  @ViewChild('focusInput') focusInput: TextInput;
+
   displayName: string = '';
   email: string = '';
   password: string = '';
@@ -23,12 +25,13 @@ export class SignUpPage {
     this.password = this.navParams.data.password;
   }
 
-  signUp(): void {
-    if (!this.displayName) {
-      this.error = 'Display name required';
-      return;
-    }
+  ionViewDidLoad() {
+    setTimeout(() => {
+      this.focusInput.setFocus();
+    }, 500);
+  }
 
+  signUp(): void {
     if (!this.email) {
       this.error = 'Email required';
       return;

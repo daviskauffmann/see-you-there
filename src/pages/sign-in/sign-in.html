@@ -10,7 +10,7 @@
 
   <ion-item class="transparent">
     <ion-icon item-left name="mail" color="light"></ion-icon>
-    <ion-input required style="color: #f4f4f4" type="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+    <ion-input required style="color: #f4f4f4" type="email" placeholder="Email" [(ngModel)]="email" #focusInput></ion-input>
   </ion-item>
 
   <ion-item class="transparent">
@@ -21,6 +21,7 @@
   <br>
 
   <button ion-button block round color="light" (click)="signIn()">Sign In</button>
+  <!--button ion-button block round color="light" (click)="signInAnonymous()">Sign In Anonymous</button-->
 
   <ion-row>
     <ion-col>
@@ -34,7 +35,8 @@
 
   <p *ngIf="error" style="color: #f53d3d">{{ error }}</p>
 
-  <!--button ion-button block icon-left color="google" (click)="signIn()"><ion-icon name="google"></ion-icon>Sign In With Google</button>
+  <!--button ion-button block icon-left color="primary" (click)="signIn()"><ion-icon name="call"></ion-icon>Sign In With Phone</button>
+  <button ion-button block icon-left color="google" (click)="signIn()"><ion-icon name="google"></ion-icon>Sign In With Google</button>
   <button ion-button block icon-left color="facebook" (click)="signIn()"><ion-icon name="facebook"></ion-icon>Sign In With Facebook</button>
   <button ion-button block icon-left color="twitter" (click)="signIn()"><ion-icon name="twitter"></ion-icon>Sign In With Twitter</button-->
 

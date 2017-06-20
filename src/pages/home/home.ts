@@ -28,7 +28,7 @@ export class HomePage {
         event.endTime = new Date(event.endTime);
         this.eventSource.push(event);
       });
-    });
+    }, console.error);
   }
 
   generateRandomEvents(): void {

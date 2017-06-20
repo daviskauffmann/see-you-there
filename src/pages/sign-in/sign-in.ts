@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
@@ -10,6 +10,8 @@ import { auth } from 'firebase/app';
   templateUrl: 'sign-in.html',
 })
 export class SignInPage {
+  @ViewChild('focusInput') focusInput: TextInput;
+
   email: string = 'test@test.com';
   password: string = 'testing';
   error: string = '';
@@ -18,8 +20,27 @@ export class SignInPage {
     public navParams: NavParams,
     public afAuth: AngularFireAuth) { }
 
+  ionViewDidLoad() {
+    setTimeout(() => {
+      this.focusInput.setFocus();
+    }, 500);
+  }
+
   signIn(): void {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+      .then(() => {
+        this.navCtrl.setRoot('HomePage', {}, {
+          animate: true,
+          direction: 'forward'
+        });
+      })
+      .catch((err: Error) => {
+        this.error = err.message;
+      });
+  }
+
+  signInAnonymous(): void {
+    this.afAuth.auth.signInAnonymously()
       .then(() => {
         this.navCtrl.setRoot('HomePage', {}, {
           animate: true,
@@ -36,9 +57,9 @@ export class SignInPage {
       email: this.email,
       password: this.password
     }, {
-      animate: true,
-      direction: 'forward'
-    });
+        animate: true,
+        direction: 'forward'
+      });
   }
 
   forgotPassword(): void {
@@ -48,7 +69,7 @@ export class SignInPage {
       });
   }
 
-  signInWithPhone(): void {
+  signInWithPhoneNumber(): void {
     this.afAuth.auth.signInWithPhoneNumber('', new auth.RecaptchaVerifier(''));
   }
 
