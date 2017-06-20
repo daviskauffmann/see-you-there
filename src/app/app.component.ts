@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -18,6 +18,7 @@ export class MyApp {
   constructor(platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
+    public alertCtrl: AlertController,
     public afAuth: AngularFireAuth) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -27,6 +28,7 @@ export class MyApp {
     });
 
     this.afAuth.auth.onAuthStateChanged((user: User) => {
+      console.log(user);
       if (user) {
         this.rootPage = 'HomePage';
       }
@@ -34,18 +36,87 @@ export class MyApp {
   }
 
   updateProfile(): void {
-    this.afAuth.auth.currentUser.updateProfile({
-      displayName: '',
-      photoURL: ''
-    });
+    this.alertCtrl.create({
+      title: 'Update Profile',
+      inputs: [
+        {
+          name: 'displayName',
+          placeholder: 'Display Name'
+        },
+        {
+          name: 'photoURL',
+          placeholder: 'Photo URL'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.afAuth.auth.currentUser.updateProfile({
+              displayName: data.displayName,
+              photoURL: data.photoURL
+            });
+          }
+        }
+      ]
+    }).present();
   }
 
   updateEmail(): void {
-    this.afAuth.auth.currentUser.updateEmail('');
+    this.alertCtrl.create({
+      title: 'Update Email',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.afAuth.auth.currentUser.updateEmail(data.email);
+          }
+        }
+      ]
+    }).present();
   }
 
   updatePassword(): void {
-    this.afAuth.auth.currentUser.updatePassword('');
+    this.alertCtrl.create({
+      title: 'Update Password',
+      inputs: [
+        {
+          name: 'password',
+          placeholder: 'Password'
+        },
+        {
+          name: 'password2',
+          placeholder: 'Confirm Password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            if (data.password !== data.password2) {
+              return;
+            }
+            
+            this.afAuth.auth.currentUser.updatePassword(data.password);
+          }
+        }
+      ]
+    }).present();
   }
 
   resendVerification(): void {

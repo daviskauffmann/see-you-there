@@ -22,7 +22,7 @@ export class HomePage {
 
     this.events.subscribe((events: Array<any>) => {
       this.eventSource = [];
-      
+
       events.forEach((event: any) => {
         event.startTime = new Date(event.startTime);
         event.endTime = new Date(event.endTime);
@@ -38,35 +38,34 @@ export class HomePage {
 
     const events: Array<any> = [];
     for (var i = 0; i < 50; i++) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
+      const date: Date = new Date();
+      const eventType: number = Math.floor(Math.random() * 2);
+      const startDay: number = Math.floor(Math.random() * 90) - 45;
+      const endDay: number = Math.floor(Math.random() * 2) + startDay;
 
+      let event = {};
       if (eventType === 0) {
-        if (endDay === startDay) {
-          endDay++;
-        }
-
-        events.push({
+        event = {
           title: `All Day - ${i}`,
           startTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay)).toString(),
-          endTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay)).toString(),
+          endTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay === startDay ? endDay + 1 : endDay)).toString(),
           allDay: true,
           category: 'Stuff'
-        });
+        };
       } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
+        const startMinute: number = Math.floor(Math.random() * 24 * 60);
+        const endMinute: number = Math.floor(Math.random() * 180) + startMinute;
 
-        events.push({
+        event = {
           title: `Event - ${i}`,
           startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute).toString(),
           endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute).toString(),
           allDay: false,
           category: 'Things'
-        });
+        };
       }
+
+      events.push(event);
     }
 
     events.forEach((event: any) => {
@@ -74,23 +73,23 @@ export class HomePage {
     });
   }
 
-  onCurrentDateChanged(ev): void {
-    
+  onCurrentDateChanged(ev: any): void {
+
   }
 
   reloadSource(startTime: Date, endTime: Date): void {
-    
+
   }
 
   onTitleChanged(title: string): void {
     this.title = title;
   }
 
-  onEventSelected(ev): void {
+  onEventSelected(ev: any): void {
     console.log(ev);
   }
 
-  onTimeSelected(ev): void {
-    
+  onTimeSelected(ev: any): void {
+
   }
 }

@@ -48,6 +48,10 @@ export class SignInPage {
       });
   }
 
+  signInWithPhone(): void {
+    this.afAuth.auth.signInWithPhoneNumber('', new auth.RecaptchaVerifier(''));
+  }
+
   signInWithGoogle(): void {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }

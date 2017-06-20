@@ -10,7 +10,7 @@ import { User } from 'firebase/app';
   templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
-  name: string = '';
+  displayName: string = '';
   email: string = '';
   password: string = '';
   password2: string = '';
@@ -24,8 +24,8 @@ export class SignUpPage {
   }
 
   signUp(): void {
-    if (!this.name) {
-      this.error = 'Name required';
+    if (!this.displayName) {
+      this.error = 'Display name required';
       return;
     }
 
@@ -45,8 +45,12 @@ export class SignUpPage {
     }
 
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-      .then((res: User) => {
-        res.sendEmailVerification();
+      .then((user: User) => {
+        user.updateProfile({
+          displayName: this.displayName,
+          photoURL: ''
+        });
+        user.sendEmailVerification();
 
         this.navCtrl.setRoot('HomePage', {}, {
           animate: true,
