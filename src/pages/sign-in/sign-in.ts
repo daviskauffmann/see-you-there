@@ -27,29 +27,25 @@ export class SignInPage {
   }
 
   signIn(): void {
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-      .then(() => {
-        this.navCtrl.setRoot('HomePage', {}, {
-          animate: true,
-          direction: 'forward'
-        });
-      })
-      .catch((err: Error) => {
-        this.error = err.message;
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
+      this.navCtrl.setRoot('HomePage', {}, {
+        animate: true,
+        direction: 'forward'
       });
+    }).catch((err: Error) => {
+      this.error = err.message;
+    });
   }
 
   signInAnonymous(): void {
-    this.afAuth.auth.signInAnonymously()
-      .then(() => {
-        this.navCtrl.setRoot('HomePage', {}, {
-          animate: true,
-          direction: 'forward'
-        });
-      })
-      .catch((err: Error) => {
-        this.error = err.message;
+    this.afAuth.auth.signInAnonymously().then(() => {
+      this.navCtrl.setRoot('HomePage', {}, {
+        animate: true,
+        direction: 'forward'
       });
+    }).catch((err: Error) => {
+      this.error = err.message;
+    });
   }
 
   signUp(): void {
@@ -57,16 +53,15 @@ export class SignInPage {
       email: this.email,
       password: this.password
     }, {
-        animate: true,
-        direction: 'forward'
-      });
+      animate: true,
+      direction: 'forward'
+    });
   }
 
   forgotPassword(): void {
-    this.afAuth.auth.sendPasswordResetEmail(this.email)
-      .catch((err: Error) => {
-        this.error = err.message;
-      });
+    this.afAuth.auth.sendPasswordResetEmail(this.email).catch((err: Error) => {
+      this.error = err.message;
+    });
   }
 
   signInWithPhoneNumber(): void {

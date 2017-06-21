@@ -47,22 +47,20 @@ export class SignUpPage {
       return;
     }
 
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
-      .then((user: User) => {
-        user.updateProfile({
-          displayName: this.displayName,
-          photoURL: ''
-        });
-        user.sendEmailVerification();
-
-        this.navCtrl.setRoot('HomePage', {}, {
-          animate: true,
-          direction: 'forward'
-        });
-      })
-      .catch((err: Error) => {
-        this.error = err.message;
+    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password).then((user: User) => {
+      user.updateProfile({
+        displayName: this.displayName,
+        photoURL: ''
       });
+      user.sendEmailVerification();
+
+      this.navCtrl.setRoot('HomePage', {}, {
+        animate: true,
+        direction: 'forward'
+      });
+    }).catch((err: Error) => {
+      this.error = err.message;
+    });
   }
 
   cancel(): void {

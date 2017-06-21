@@ -79,14 +79,13 @@ export class MyApp {
             return;
           }
 
-          this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password))
-            .then((user: User) => {
-              user.updateProfile({
-                displayName: data.displayName,
-                photoURL: ''
-              });
-              user.sendEmailVerification();
+          this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password)).then((user: User) => {
+            user.updateProfile({
+              displayName: data.displayName,
+              photoURL: ''
             });
+            user.sendEmailVerification();
+          });
         }
       }]
     }).present();
@@ -171,22 +170,20 @@ export class MyApp {
   }
 
   deleteAccount(): void {
-    this.afAuth.auth.currentUser.delete()
-      .then(() => {
-        this.nav.setRoot('SignInPage', {}, {
-          animate: true,
-          direction: 'back'
-        });
+    this.afAuth.auth.currentUser.delete().then(() => {
+      this.nav.setRoot('SignInPage', {}, {
+        animate: true,
+        direction: 'back'
       });
+    });
   }
 
   signOut(): void {
-    this.afAuth.auth.signOut()
-      .then(() => {
-        this.nav.setRoot('SignInPage', {}, {
-          animate: true,
-          direction: 'back'
-        });
+    this.afAuth.auth.signOut().then(() => {
+      this.nav.setRoot('SignInPage', {}, {
+        animate: true,
+        direction: 'back'
       });
+    });
   }
 }
