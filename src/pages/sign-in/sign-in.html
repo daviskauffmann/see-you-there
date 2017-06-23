@@ -9,31 +9,31 @@
   </ion-row>
 
   <ion-item class="transparent">
-    <ion-icon item-left name="mail" color="light"></ion-icon>
-    <ion-input required style="color: #f4f4f4" type="email" placeholder="Email" [(ngModel)]="email" #focusInput></ion-input>
+    <ion-icon name="mail" color="light" item-left></ion-icon>
+    <ion-input class="light" type="email" placeholder="Email" [(ngModel)]="email" required #focusInput></ion-input>
   </ion-item>
 
   <ion-item class="transparent">
-    <ion-icon item-left name="lock" color="light"></ion-icon>
-    <ion-input required style="color: #f4f4f4" type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
+    <ion-icon name="lock" color="light" item-left></ion-icon>
+    <ion-input class="light" type="password" placeholder="Password" [(ngModel)]="password" required></ion-input>
   </ion-item>
 
   <br>
 
-  <button ion-button block round color="light" (click)="signIn()">Sign In</button>
-  <!--button ion-button block round color="light" (click)="signInAnonymous()">Sign In Anonymous</button-->
+  <button ion-button round block color="light" (click)="signIn()">Sign In</button>
+  <!--button ion-button round block color="light" (click)="signInAnonymous()">Sign In Anonymous</button-->
 
   <ion-row>
     <ion-col>
-      <button ion-button small block clear color="light" (click)="forgotPassword()">Forgot Password?</button>
+      <button ion-button small clear round block color="light" (click)="forgotPassword()">Forgot Password?</button>
     </ion-col>
     <ion-col></ion-col>
     <ion-col>
-      <button ion-button small block clear color="light" (click)="signUp()">Sign Up!</button>
+      <button ion-button small clear round block color="light" (click)="signUp()">Sign Up!</button>
     </ion-col>
   </ion-row>
 
-  <p *ngIf="error" style="color: #f53d3d">{{ error }}</p>
+  <p *ngIf="error" class="danger">{{ error }}</p>
 
   <!--button ion-button block icon-left color="primary" (click)="signIn()"><ion-icon name="call"></ion-icon>Sign In With Phone</button>
   <button ion-button block icon-left color="google" (click)="signIn()"><ion-icon name="google"></ion-icon>Sign In With Google</button>

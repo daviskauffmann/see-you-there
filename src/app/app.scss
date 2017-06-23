@@ -28,3 +28,11 @@
 .transparent {
 	background-color: transparent;
 }
+
+.danger {
+  color: color($colors, danger);
+}
+
+.light {
+  color: color($colors, light);
+}

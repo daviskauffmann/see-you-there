@@ -37,129 +37,154 @@ export class MyApp {
   upgradeAccount(): void {
     this.alertCtrl.create({
       title: 'Upgrade Account',
-      inputs: [{
-        name: 'displayName',
-        placeholder: 'Display Name',
-        type: 'text',
-        value: 'Test'
-      }, {
-        name: 'email',
-        placeholder: 'Email',
-        type: 'email',
-        value: 'test@test.com'
-      }, {
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password',
-        value: 'testing'
-      }, {
-        name: 'password2',
-        placeholder: 'Confirm Password',
-        type: 'password',
-        value: 'testing'
-      }],
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: 'Ok',
-        handler: (data: any) => {
-          if (!data.displayName) {
-            return;
-          }
-
-          if (!data.email) {
-            return;
-          }
-
-          if (!data.password) {
-            return;
-          }
-
-          if (data.password !== data.password2) {
-            return;
-          }
-
-          this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password)).then((user: User) => {
-            user.updateProfile({
-              displayName: data.displayName,
-              photoURL: ''
-            });
-            user.sendEmailVerification();
-          });
+      inputs: [
+        {
+          name: 'displayName',
+          placeholder: 'Display Name',
+          type: 'text',
+          value: 'Test'
+        },
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email',
+          value: 'test@test.com'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password',
+          value: 'testing'
+        },
+        {
+          name: 'password2',
+          placeholder: 'Confirm Password',
+          type: 'password',
+          value: 'testing'
         }
-      }]
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: (data: any) => {
+            if (!data.displayName) {
+              return;
+            }
+
+            if (!data.email) {
+              return;
+            }
+
+            if (!data.password) {
+              return;
+            }
+
+            if (data.password !== data.password2) {
+              return;
+            }
+
+            this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password)).then((user: User) => {
+              user.updateProfile({
+                displayName: data.displayName,
+                photoURL: ''
+              });
+              user.sendEmailVerification();
+            });
+          }
+        }
+      ]
     }).present();
   }
 
   updateProfile(): void {
     this.alertCtrl.create({
       title: 'Update Profile',
-      inputs: [{
-        name: 'displayName',
-        placeholder: 'Display Name',
-        type: 'text'
-      }, {
-        name: 'photoURL',
-        placeholder: 'Photo URL',
-        type: 'text'
-      }],
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: 'Ok',
-        handler: (data: any) => {
-          this.afAuth.auth.currentUser.updateProfile({
-            displayName: data.displayName,
-            photoURL: data.photoURL
-          });
+      inputs: [
+        {
+          name: 'displayName',
+          placeholder: 'Display Name',
+          type: 'text'
+        },
+        {
+          name: 'photoURL',
+          placeholder: 'Photo URL',
+          type: 'text'
         }
-      }]
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: (data: any) => {
+            this.afAuth.auth.currentUser.updateProfile({
+              displayName: data.displayName,
+              photoURL: data.photoURL
+            });
+          }
+        }
+      ]
     }).present();
   }
 
   updateEmail(): void {
     this.alertCtrl.create({
       title: 'Update Email',
-      inputs: [{
-        name: 'email',
-        placeholder: 'Email',
-        type: 'email'
-      }],
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: 'Ok',
-        handler: (data: any) => {
-          this.afAuth.auth.currentUser.updateEmail(data.email);
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email'
         }
-      }]
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: (data: any) => {
+            this.afAuth.auth.currentUser.updateEmail(data.email);
+          }
+        }
+      ]
     }).present();
   }
 
   updatePassword(): void {
     this.alertCtrl.create({
       title: 'Update Password',
-      inputs: [{
-        name: 'password',
-        placeholder: 'Password',
-        type: 'password'
-      }, {
-        name: 'password2',
-        placeholder: 'Confirm Password',
-        type: 'password'
-      }],
-      buttons: [{
-        text: 'Cancel'
-      }, {
-        text: 'Ok',
-        handler: (data: any) => {
-          if (data.password !== data.password2) {
-            return;
-          }
-
-          this.afAuth.auth.currentUser.updatePassword(data.password);
+      inputs: [
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        },
+        {
+          name: 'password2',
+          placeholder: 'Confirm Password',
+          type: 'password'
         }
-      }]
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: (data: any) => {
+            if (data.password !== data.password2) {
+              return;
+            }
+
+            this.afAuth.auth.currentUser.updatePassword(data.password);
+          }
+        }
+      ]
     }).present();
   }
 

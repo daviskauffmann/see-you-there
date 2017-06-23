@@ -24,6 +24,8 @@ export class HomePage {
       this.eventSource = [];
 
       events.forEach((event: any) => {
+        // Events are stored in Firebase as strings.
+        // So they must be converted to dates before use in the calendar.
         event.startTime = new Date(event.startTime);
         event.endTime = new Date(event.endTime);
         this.eventSource.push(event);
@@ -43,7 +45,7 @@ export class HomePage {
       const startDay: number = Math.floor(Math.random() * 90) - 45;
       const endDay: number = Math.floor(Math.random() * 2) + startDay;
 
-      let event = {};
+      let event: any;
       if (eventType === 0) {
         event = {
           title: `All Day - ${i}`,
