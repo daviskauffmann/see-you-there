@@ -12,6 +12,5 @@ export class EventPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams) {
       this.event = this.navParams.data;
-      console.log(this.event);
   }
 }

@@ -75,23 +75,11 @@ export class HomePage {
     });
   }
 
-  onCurrentDateChanged(ev: any): void {
-
-  }
-
-  reloadSource(startTime: Date, endTime: Date): void {
-
-  }
-
   onTitleChanged(title: string): void {
     this.title = title;
   }
 
-  onEventSelected(ev: any): void {
-    this.navCtrl.push('EventPage', ev);
-  }
-
-  onTimeSelected(ev: any): void {
-
+  onEventSelected(event: any): void {
+    this.navCtrl.push('EventPage', event);
   }
 }
