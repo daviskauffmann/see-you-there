@@ -16,15 +16,15 @@ export class HomePage {
   events: FirebaseListObservable<Array<any>>;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public afDB: AngularFireDatabase) {
+              public navParams: NavParams,
+              public afDB: AngularFireDatabase) {
     this.events = this.afDB.list('/events');
 
     this.events.subscribe((events: Array<any>) => {
       this.eventSource = [];
 
       events.forEach((event: any) => {
-        // Events are stored in Firebase as strings.
+        // Event times are stored in Firebase as strings.
         // So they must be converted to dates before use in the calendar.
         event.startTime = new Date(event.startTime);
         event.endTime = new Date(event.endTime);
@@ -88,7 +88,7 @@ export class HomePage {
   }
 
   onEventSelected(ev: any): void {
-    console.log(ev);
+    this.navCtrl.push('EventPage', ev);
   }
 
   onTimeSelected(ev: any): void {

@@ -19,8 +19,8 @@ export class SignUpPage {
   error: string = '';
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public afAuth: AngularFireAuth) {
+              public navParams: NavParams,
+              public afAuth: AngularFireAuth) {
     this.email = this.navParams.data.email;
     this.password = this.navParams.data.password;
   }
