@@ -30,10 +30,9 @@
 
 </ion-header>
 
-
 <ion-content>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendarMode" [currentDate]="currentDate" (onEventSelected)="onEventSelected($event)"
-    (onTitleChanged)="onTitleChanged($event)"></calendar>
+  <calendar [eventSource]="eventSource" [calendarMode]="calendarMode" [currentDate]="currentDate" (onTitleChanged)="onTitleChanged($event)"
+    (onEventSelected)="onEventSelected($event)"></calendar>
 
 </ion-content>
