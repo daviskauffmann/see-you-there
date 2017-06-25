@@ -16,8 +16,8 @@ export class HomePage {
   events: FirebaseListObservable<Array<any>>;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public afDB: AngularFireDatabase) {
+    public navParams: NavParams,
+    public afDB: AngularFireDatabase) {
     this.events = this.afDB.list('/events');
 
     this.events.subscribe((events: Array<any>) => {
@@ -39,35 +39,37 @@ export class HomePage {
     });
 
     const events: Array<any> = [];
-    for (var i = 0; i < 50; i++) {
-      const date: Date = new Date();
-      const eventType: number = Math.floor(Math.random() * 2);
-      const startDay: number = Math.floor(Math.random() * 90) - 45;
-      const endDay: number = Math.floor(Math.random() * 2) + startDay;
-
-      let event: any;
+    for (var i = 0; i < 50; i += 1) {
+      var date = new Date();
+      var eventType = Math.floor(Math.random() * 2);
+      var startDay = Math.floor(Math.random() * 90) - 45;
+      var endDay = Math.floor(Math.random() * 2) + startDay;
+      var startTime;
+      var endTime;
       if (eventType === 0) {
-        event = {
-          title: `All Day - ${i}`,
-          startTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay)).toString(),
-          endTime: new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay === startDay ? endDay + 1 : endDay)).toString(),
-          allDay: true,
-          category: 'Stuff'
-        };
+        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
+        if (endDay === startDay) {
+          endDay += 1;
+        }
+        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+        events.push({
+          title: 'All Day - ' + i,
+          startTime: startTime.toString(),
+          endTime: endTime.toString(),
+          allDay: true
+        });
       } else {
-        const startMinute: number = Math.floor(Math.random() * 24 * 60);
-        const endMinute: number = Math.floor(Math.random() * 180) + startMinute;
-
-        event = {
-          title: `Event - ${i}`,
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute).toString(),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute).toString(),
-          allDay: false,
-          category: 'Things'
-        };
+        var startMinute = Math.floor(Math.random() * 24 * 60);
+        var endMinute = Math.floor(Math.random() * 180) + startMinute;
+        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
+        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+        events.push({
+          title: 'Event - ' + i,
+          startTime: startTime.toString(),
+          endTime: endTime.toString(),
+          allDay: false
+        });
       }
-
-      events.push(event);
     }
 
     events.forEach((event: any) => {
