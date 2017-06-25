@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, TextInput, } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { User } from 'firebase/app';
@@ -20,6 +20,7 @@ export class SignUpPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public loadingCtrl: LoadingController,
               public afAuth: AngularFireAuth) {
     this.email = this.navParams.data.email;
     this.password = this.navParams.data.password;
@@ -47,7 +48,14 @@ export class SignUpPage {
       return;
     }
 
+    let loader = this.loadingCtrl.create({
+      content: 'Creating'
+    });
+    loader.present();
+
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password).then((user: User) => {
+      loader.dismiss();
+
       user.updateProfile({
         displayName: this.displayName,
         photoURL: ''
@@ -59,6 +67,8 @@ export class SignUpPage {
         direction: 'forward'
       });
     }).catch((err: Error) => {
+      loader.dismiss();
+
       this.error = err.message;
     });
   }

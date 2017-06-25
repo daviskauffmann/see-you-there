@@ -11,6 +11,8 @@
 
     <ion-list *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous">
 
+      <ion-list-header> {{ afAuth.auth.currentUser.displayName || afAuth.auth.currentUser.email }}</ion-list-header>
+
       <button ion-item (click)="updateProfile()">Update Profile</button>
       <button ion-item (click)="updateEmail()">Update Email</button>
       <button ion-item (click)="updatePassword()">Update Password</button>

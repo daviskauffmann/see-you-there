@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, TextInput } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, TextInput } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { auth } from 'firebase/app';
@@ -18,6 +18,7 @@ export class SignInPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public loadingCtrl: LoadingController,
               public afAuth: AngularFireAuth) { }
 
   ionViewDidLoad() {
@@ -27,23 +28,41 @@ export class SignInPage {
   }
 
   signIn(): void {
+    let loader = this.loadingCtrl.create({
+      content: 'Authenticating'
+    });
+    loader.present();
+
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
+      loader.dismiss();
+
       this.navCtrl.setRoot('HomePage', {}, {
         animate: true,
         direction: 'forward'
       });
     }).catch((err: Error) => {
+      loader.dismiss();
+
       this.error = err.message;
     });
   }
 
-  signInAnonymous(): void {
+  signInAnonymously(): void {
+    let loader = this.loadingCtrl.create({
+      content: 'Authenticating'
+    });
+    loader.present();
+
     this.afAuth.auth.signInAnonymously().then(() => {
+      loader.dismiss();
+
       this.navCtrl.setRoot('HomePage', {}, {
         animate: true,
         direction: 'forward'
       });
     }).catch((err: Error) => {
+      loader.dismiss();
+
       this.error = err.message;
     });
   }
