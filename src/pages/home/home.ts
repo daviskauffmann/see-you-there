@@ -56,7 +56,8 @@ export class HomePage {
           title: 'All Day - ' + i,
           startTime: startTime.toString(),
           endTime: endTime.toString(),
-          allDay: true
+          allDay: true,
+          category: 'Stuff'
         });
       } else {
         var startMinute = Math.floor(Math.random() * 24 * 60);
@@ -67,7 +68,8 @@ export class HomePage {
           title: 'Event - ' + i,
           startTime: startTime.toString(),
           endTime: endTime.toString(),
-          allDay: false
+          allDay: false,
+          category: 'Things'
         });
       }
     }
