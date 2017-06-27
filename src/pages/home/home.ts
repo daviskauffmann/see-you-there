@@ -18,76 +18,69 @@ export class HomePage {
   events: FirebaseListObservable<Array<any>>;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public afDB: AngularFireDatabase) {
+              public navParams: NavParams,
+              public afDB: AngularFireDatabase) {
     this.events = this.afDB.list('/events');
 
-    this.events.subscribe((events: Array<any>) => {
+    this.events.subscribe(events => {
       this.eventSource = [];
 
-      events.forEach((event: any) => {
+      events.forEach(event => {
         this.eventSource.push({
           id: event.$key,
           title: event.title,
           startTime: new Date(event.startTime),
           endTime: new Date(event.endTime),
-          allDay: event.allDay
+          allDay: event.allDay,
+          category: event.category
         });
       });
     }, console.error);
   }
 
-  generateRandomEvents(): void {
-    this.eventSource.forEach((event: Event) => {
+  generateRandomEvents() {
+    this.eventSource.forEach(event => {
       this.events.remove(event.id);
     });
 
-    const events: Array<any> = [];
-    for (var i = 0; i < 50; i += 1) {
-      var date = new Date();
-      var eventType = Math.floor(Math.random() * 2);
-      var startDay = Math.floor(Math.random() * 90) - 45;
-      var endDay = Math.floor(Math.random() * 2) + startDay;
-      var startTime;
-      var endTime;
-      if (eventType === 0) {
-        startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
-        if (endDay === startDay) {
-          endDay += 1;
-        }
-        endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+    const events = [];
+    for (let i = 0; i < 50; i++) {
+      const date = new Date();
+      const startDay = Math.floor(Math.random() * 30) - 15;
+      const endDay = Math.floor(Math.random() * 2) + startDay;
+
+      if (Math.floor(Math.random() * 2) === 0) {
         events.push({
-          title: 'All Day - ' + i,
-          startTime: startTime.toString(),
-          endTime: endTime.toString(),
+          title: `All Day - ${i}`,
+          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay).toString(),
+          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay === startDay ? endDay + 1 : endDay).toString(),
           allDay: true,
           category: 'Stuff'
         });
       } else {
-        var startMinute = Math.floor(Math.random() * 24 * 60);
-        var endMinute = Math.floor(Math.random() * 180) + startMinute;
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+        const startMinute = Math.floor(Math.random() * 24 * 60);
+        const endMinute = Math.floor(Math.random() * 180) + startMinute;
+
         events.push({
-          title: 'Event - ' + i,
-          startTime: startTime.toString(),
-          endTime: endTime.toString(),
+          title: `Event - ${i}`,
+          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute).toString(),
+          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute).toString(),
           allDay: false,
           category: 'Things'
         });
       }
     }
 
-    events.forEach((event: any) => {
+    events.forEach(event => {
       this.events.push(event);
     });
   }
 
-  onTitleChanged(title: string): void {
+  onTitleChanged(title: string) {
     this.title = title;
   }
 
-  onEventSelected(event: Event): void {
+  onEventSelected(event: Event) {
     this.navCtrl.push('EventPage', event);
   }
 }

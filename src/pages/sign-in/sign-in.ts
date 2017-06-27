@@ -27,7 +27,7 @@ export class SignInPage {
     }, 500);
   }
 
-  signIn(): void {
+  signIn() {
     let loader = this.loadingCtrl.create({
       content: 'Authenticating'
     });
@@ -40,14 +40,14 @@ export class SignInPage {
         animate: true,
         direction: 'forward'
       });
-    }).catch((err: Error) => {
+    }).catch(err => {
       loader.dismiss();
 
       this.error = err.message;
     });
   }
 
-  signInAnonymously(): void {
+  signInAnonymously() {
     let loader = this.loadingCtrl.create({
       content: 'Authenticating'
     });
@@ -60,14 +60,14 @@ export class SignInPage {
         animate: true,
         direction: 'forward'
       });
-    }).catch((err: Error) => {
+    }).catch(err => {
       loader.dismiss();
 
       this.error = err.message;
     });
   }
 
-  signUp(): void {
+  signUp() {
     this.navCtrl.setRoot('SignUpPage', {
       email: this.email,
       password: this.password
@@ -77,25 +77,25 @@ export class SignInPage {
     });
   }
 
-  forgotPassword(): void {
-    this.afAuth.auth.sendPasswordResetEmail(this.email).catch((err: Error) => {
+  forgotPassword() {
+    this.afAuth.auth.sendPasswordResetEmail(this.email).catch(err => {
       this.error = err.message;
     });
   }
 
-  signInWithPhoneNumber(): void {
+  signInWithPhoneNumber() {
     this.afAuth.auth.signInWithPhoneNumber('', new auth.RecaptchaVerifier(''));
   }
 
-  signInWithGoogle(): void {
+  signInWithGoogle() {
     this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
   }
 
-  signInWithFacebook(): void {
+  signInWithFacebook() {
     this.afAuth.auth.signInWithPopup(new auth.FacebookAuthProvider());
   }
 
-  signInWithTwitter(): void {
+  signInWithTwitter() {
     this.afAuth.auth.signInWithPopup(new auth.TwitterAuthProvider());
   }
 }

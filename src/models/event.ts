@@ -4,4 +4,5 @@ export class Event {
     startTime: Date;
     endTime: Date;
     allDay: boolean;
+    category: string;
 }

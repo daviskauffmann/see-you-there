@@ -34,7 +34,7 @@ export class MyApp {
     });
   }
 
-  upgradeAccount(): void {
+  upgradeAccount() {
     this.alertCtrl.create({
       title: 'Upgrade Account',
       inputs: [
@@ -69,7 +69,7 @@ export class MyApp {
         },
         {
           text: 'Ok',
-          handler: (data: any) => {
+          handler: data => {
             if (!data.displayName) {
               return;
             }
@@ -99,7 +99,7 @@ export class MyApp {
     }).present();
   }
 
-  updateProfile(): void {
+  updateProfile() {
     this.alertCtrl.create({
       title: 'Update Profile',
       inputs: [
@@ -120,7 +120,7 @@ export class MyApp {
         },
         {
           text: 'Ok',
-          handler: (data: any) => {
+          handler: data => {
             this.afAuth.auth.currentUser.updateProfile({
               displayName: data.displayName,
               photoURL: data.photoURL
@@ -131,7 +131,7 @@ export class MyApp {
     }).present();
   }
 
-  updateEmail(): void {
+  updateEmail() {
     this.alertCtrl.create({
       title: 'Update Email',
       inputs: [
@@ -147,7 +147,7 @@ export class MyApp {
         },
         {
           text: 'Ok',
-          handler: (data: any) => {
+          handler: data => {
             this.afAuth.auth.currentUser.updateEmail(data.email);
           }
         }
@@ -155,7 +155,7 @@ export class MyApp {
     }).present();
   }
 
-  updatePassword(): void {
+  updatePassword() {
     this.alertCtrl.create({
       title: 'Update Password',
       inputs: [
@@ -176,7 +176,7 @@ export class MyApp {
         },
         {
           text: 'Ok',
-          handler: (data: any) => {
+          handler: data => {
             if (data.password !== data.password2) {
               return;
             }
@@ -188,13 +188,13 @@ export class MyApp {
     }).present();
   }
 
-  resendVerification(): void {
+  resendVerification() {
     if (!this.afAuth.auth.currentUser.emailVerified) {
       this.afAuth.auth.currentUser.sendEmailVerification();
     }
   }
 
-  deleteAccount(): void {
+  deleteAccount() {
     this.afAuth.auth.currentUser.delete().then(() => {
       this.nav.setRoot('SignInPage', {}, {
         animate: true,
@@ -203,7 +203,7 @@ export class MyApp {
     });
   }
 
-  signOut(): void {
+  signOut() {
     this.afAuth.auth.signOut().then(() => {
       this.nav.setRoot('SignInPage', {}, {
         animate: true,

@@ -32,7 +32,7 @@ export class SignUpPage {
     }, 500);
   }
 
-  signUp(): void {
+  signUp() {
     if (!this.email) {
       this.error = 'Email required';
       return;
@@ -66,14 +66,14 @@ export class SignUpPage {
         animate: true,
         direction: 'forward'
       });
-    }).catch((err: Error) => {
+    }).catch(err => {
       loader.dismiss();
 
       this.error = err.message;
     });
   }
 
-  cancel(): void {
+  cancel() {
     this.navCtrl.setRoot('SignInPage', {}, {
       animate: true,
       direction: 'back'
