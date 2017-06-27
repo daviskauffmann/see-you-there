@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
+import { Event } from '../../models/event';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -10,7 +12,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 })
 export class HomePage {
   title: string = '';
-  eventSource: Array<any> = [];
+  eventSource: Array<Event> = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
   events: FirebaseListObservable<Array<any>>;
@@ -24,18 +26,20 @@ export class HomePage {
       this.eventSource = [];
 
       events.forEach((event: any) => {
-        // Event times are stored in Firebase as strings.
-        // So they must be converted to dates before use in the calendar.
-        event.startTime = new Date(event.startTime);
-        event.endTime = new Date(event.endTime);
-        this.eventSource.push(event);
+        this.eventSource.push({
+          id: event.$key,
+          title: event.title,
+          startTime: new Date(event.startTime),
+          endTime: new Date(event.endTime),
+          allDay: event.allDay
+        });
       });
     }, console.error);
   }
 
   generateRandomEvents(): void {
-    this.eventSource.forEach((event: any) => {
-      this.events.remove(event.$key);
+    this.eventSource.forEach((event: Event) => {
+      this.events.remove(event.id);
     });
 
     const events: Array<any> = [];
@@ -83,7 +87,7 @@ export class HomePage {
     this.title = title;
   }
 
-  onEventSelected(event: any): void {
+  onEventSelected(event: Event): void {
     this.navCtrl.push('EventPage', event);
   }
 }
