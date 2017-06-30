@@ -76,6 +76,51 @@ export class HomePage {
     });
   }
 
+  generateTestEvents() {
+    this.eventSource.forEach(event => {
+      this.events.remove(event.id);
+    });
+
+    const events = [
+      {
+        title: 'Macedonia Baptist Church',
+        startTime: new Date(2017, 6, 4, 6).toString(),
+        endTime: new Date(2017, 6, 4, 7).toString(),
+        allDay: false,
+        category: 'Religious',
+        website: 'http://www.mmbcmelbourne.com/'
+      },
+      {
+        title: 'Tennis League',
+        startTime: new Date(2017, 6, 4).toString(),
+        endTime: new Date(2017, 6, 5).toString(),
+        allDay: true,
+        category: 'Fitness',
+        location: 'Sarno Courts'
+      },
+      {
+        title: 'Eau Gallie Public Library',
+        startTime: new Date(2017, 6, 4, 6).toString(),
+        endTime: new Date(2017, 6, 4, 7).toString(),
+        allDay: false,
+        category: 'Literature',
+        website: 'http://www.brevardfl.gov/publiclibraries/branches/eaugallie/home'
+      },
+      {
+        title: 'Jason Domulot',
+        startTime: new Date(2017, 6, 4, 6).toString(),
+        endTime: new Date(2017, 6, 4, 9).toString(),
+        allDay: false,
+        category: 'Live Music',
+        venue: 'Grills Seafood Deck & Tiki Bar - Port - Cape Canaveral'
+      }
+    ];
+
+    events.forEach(event => {
+      this.events.push(event);
+    });
+  }
+
   onTitleChanged(title: string) {
     this.title = title;
   }
