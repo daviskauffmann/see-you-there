@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+
+    <ion-title>Add Event</ion-title>
+
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()"></button>
+    </ion-buttons>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  {{ title }}
+  {{ startTime }}
+  {{ endTime }}
+  {{ allDay }}
+  {{ category }}
+
+  <button ion-button (click)="add()"></button>
+</ion-content>

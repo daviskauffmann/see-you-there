@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
@@ -11,7 +11,7 @@ import { Event } from '../../models/event';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  title: string = '';
+  title: string;
   eventSource: Array<Event> = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
@@ -19,6 +19,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public modalCtrl: ModalController,
               public afDB: AngularFireDatabase) {
     this.events = this.afDB.list('/events');
 
@@ -26,14 +27,19 @@ export class HomePage {
       this.eventSource = [];
 
       events.forEach(event => {
-        this.eventSource.push({
+        let calendarEvent = {
           id: event.$key,
           title: event.title,
           startTime: new Date(event.startTime),
           endTime: new Date(event.endTime),
           allDay: event.allDay,
           category: event.category
-        });
+        };
+
+        if (calendarEvent.endTime < new Date())
+          return this.events.remove(calendarEvent.id);
+
+        this.eventSource.push(calendarEvent);
       });
     }, console.error);
   }
@@ -76,49 +82,18 @@ export class HomePage {
     });
   }
 
-  generateTestEvents() {
-    this.eventSource.forEach(event => {
-      this.events.remove(event.id);
+  addEvent() {
+    let modal = this.modalCtrl.create('AddEventPage');
+
+    modal.onDidDismiss(data => {
+      if (!data)
+        return;
+
+      // this.events.push(data);
+      console.log(data);
     });
 
-    const events = [
-      {
-        title: 'Macedonia Baptist Church',
-        startTime: new Date(2017, 6, 4, 6).toString(),
-        endTime: new Date(2017, 6, 4, 7).toString(),
-        allDay: false,
-        category: 'Religious',
-        website: 'http://www.mmbcmelbourne.com/'
-      },
-      {
-        title: 'Tennis League',
-        startTime: new Date(2017, 6, 4).toString(),
-        endTime: new Date(2017, 6, 5).toString(),
-        allDay: true,
-        category: 'Fitness',
-        location: 'Sarno Courts'
-      },
-      {
-        title: 'Eau Gallie Public Library',
-        startTime: new Date(2017, 6, 4, 6).toString(),
-        endTime: new Date(2017, 6, 4, 7).toString(),
-        allDay: false,
-        category: 'Literature',
-        website: 'http://www.brevardfl.gov/publiclibraries/branches/eaugallie/home'
-      },
-      {
-        title: 'Jason Domulot',
-        startTime: new Date(2017, 6, 4, 6).toString(),
-        endTime: new Date(2017, 6, 4, 9).toString(),
-        allDay: false,
-        category: 'Live Music',
-        venue: 'Grills Seafood Deck & Tiki Bar - Port - Cape Canaveral'
-      }
-    ];
-
-    events.forEach(event => {
-      this.events.push(event);
-    });
+    modal.present();
   }
 
   onTitleChanged(title: string) {

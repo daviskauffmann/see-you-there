@@ -14,7 +14,7 @@ export class SignInPage {
 
   email: string = 'test@test.com';
   password: string = 'testing';
-  error: string = '';
+  error: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,

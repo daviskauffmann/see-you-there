@@ -12,11 +12,11 @@ import { User } from 'firebase/app';
 export class SignUpPage {
   @ViewChild('focusInput') focusInput: TextInput;
 
-  displayName: string = '';
-  email: string = '';
-  password: string = '';
-  password2: string = '';
-  error: string = '';
+  displayName: string;
+  email: string;
+  password: string;
+  password2: string;
+  error: string;
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
@@ -33,20 +33,14 @@ export class SignUpPage {
   }
 
   signUp() {
-    if (!this.email) {
-      this.error = 'Email required';
-      return;
-    }
+    if (!this.email)
+      return this.error = 'Email required';
 
-    if (!this.password) {
-      this.error = 'Password required';
-      return;
-    }
+    if (!this.password)
+      return this.error = 'Password required';
 
-    if (this.password !== this.password2) {
-      this.error = 'Passwords don\'t match';
-      return;
-    }
+    if (this.password !== this.password2)
+      return this.error = 'Passwords don\'t match';
 
     let loader = this.loadingCtrl.create({
       content: 'Creating'
