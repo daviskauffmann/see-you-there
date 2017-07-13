@@ -26,21 +26,21 @@ export class AddEventPage {
     if (!this.title)
       return this.error = 'Title required';
 
-    if (!this.startTime)
+    /*if (!this.startTime)
       return this.error = 'Start time required';
 
     if (!this.endTime)
       return this.error = 'End time required';
 
     if (!this.category)
-      return this.error = 'Category required';
+      return this.error = 'Category required';*/
 
     this.viewCtrl.dismiss({
       title: this.title,
-      startTime: this.startTime,
-      endTime: this.endTime,
-      allDay: this.allDay,
-      category: this.category
+      startTime: this.startTime || new Date().toString(),
+      endTime: this.endTime || new Date().toString(),
+      allDay: this.allDay || false,
+      category: this.category || 'Event'
     });
   }
 }

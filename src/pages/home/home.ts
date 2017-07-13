@@ -89,8 +89,7 @@ export class HomePage {
       if (!data)
         return;
 
-      // this.events.push(data);
-      console.log(data);
+      this.events.push(data);
     });
 
     modal.present();

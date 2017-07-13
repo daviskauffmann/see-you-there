@@ -5,7 +5,7 @@
     <ion-title>Add Event</ion-title>
 
     <ion-buttons start>
-      <button ion-button (click)="dismiss()"></button>
+      <button ion-button (click)="dismiss()">Cancel</button>
     </ion-buttons>
 
   </ion-navbar>
@@ -14,11 +14,10 @@
 
 
 <ion-content padding>
-  {{ title }}
-  {{ startTime }}
-  {{ endTime }}
-  {{ allDay }}
-  {{ category }}
+  <ion-item>
+    <ion-input placeholder="Title" [(ngModel)]="title"></ion-input>
+  </ion-item>
 
-  <button ion-button (click)="add()"></button>
+  <button ion-button block (click)="add()">Add Event</button>
+
 </ion-content>
