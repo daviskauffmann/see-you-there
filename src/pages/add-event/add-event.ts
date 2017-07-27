@@ -37,8 +37,8 @@ export class AddEventPage {
 
     this.viewCtrl.dismiss({
       title: this.title,
-      startTime: this.startTime || new Date().toString(),
-      endTime: this.endTime || new Date().toString(),
+      startTime: (this.startTime || new Date()).toString(),
+      endTime: (this.endTime || new Date()).toString(),
       allDay: this.allDay || false,
       category: this.category || 'Event'
     });

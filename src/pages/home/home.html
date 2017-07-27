@@ -32,7 +32,19 @@
 
 <ion-content>
 
-  <calendar [eventSource]="eventSource" [calendarMode]="calendarMode" [currentDate]="currentDate" (onTitleChanged)="onTitleChanged($event)"
+  <template #monthviewEventDetailTemplate let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <ion-list *ngFor="let category of getCategories()">
+      <ion-list-header>{{ category }}</ion-list-header>
+      <button ion-item *ngFor="let event of getEvents(category)" (click)="onEventSelected(event)">
+          <div>
+            {{ event.title }} | {{ event.category }}
+          </div>
+        </button>
+    </ion-list>
+  </template>
+
+  <calendar [monthviewEventDetailTemplate]="monthviewEventDetailTemplate" [eventSource]="eventSource" [calendarMode]="calendarMode"
+    [currentDate]="currentDate" (onTitleChanged)="onTitleChanged($event)" (onCurrentDateChanged)="onCurrentDateChanged($event)"
     (onEventSelected)="onEventSelected($event)" step="1"></calendar>
 
 </ion-content>

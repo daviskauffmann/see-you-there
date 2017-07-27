@@ -14,8 +14,29 @@
 
 
 <ion-content padding>
+
   <ion-item>
     <ion-input placeholder="Title" [(ngModel)]="title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Start Day</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Start Time</ion-label>
+    <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>End Day</ion-label>
+    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>End Time</ion-label>
+    <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="myDate"></ion-datetime>
   </ion-item>
 
   <button ion-button block (click)="add()">Add Event</button>

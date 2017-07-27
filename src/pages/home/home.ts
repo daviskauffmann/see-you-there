@@ -15,12 +15,13 @@ export class HomePage {
   eventSource: Array<Event> = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
+  selectedDate: Date = new Date();
   events: FirebaseListObservable<Array<any>>;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public modalCtrl: ModalController,
-              public afDB: AngularFireDatabase) {
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    public afDB: AngularFireDatabase) {
     this.events = this.afDB.list('/events');
 
     this.events.subscribe(events => {
@@ -36,8 +37,8 @@ export class HomePage {
           category: event.category
         };
 
-        if (calendarEvent.endTime < new Date())
-          return this.events.remove(calendarEvent.id);
+        /*if (calendarEvent.endTime < new Date())
+          return this.events.remove(calendarEvent.id);*/
 
         this.eventSource.push(calendarEvent);
       });
@@ -82,6 +83,21 @@ export class HomePage {
     });
   }
 
+  getCategories() {
+    const categories: string[] = [];
+    this.eventSource.forEach(event => {
+      if (categories.indexOf(event.category) === -1
+        && event.startTime.getDate() === this.selectedDate.getDate()) {
+        categories.push(event.category);
+      }
+    });
+    return categories.sort();
+  }
+
+  getEvents(category: string) {
+    return this.eventSource.filter(event => event.category === category);
+  }
+
   addEvent() {
     let modal = this.modalCtrl.create('AddEventPage');
 
@@ -101,5 +117,9 @@ export class HomePage {
 
   onEventSelected(event: Event) {
     this.navCtrl.push('EventPage', event);
+  }
+
+  onCurrentDateChanged(date: Date) {
+    this.selectedDate = date;
   }
 }
