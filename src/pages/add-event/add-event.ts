@@ -14,9 +14,10 @@ export class AddEventPage {
   category: string;
   error: string;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public viewCtrl: ViewController) { }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public viewCtrl: ViewController) { }
 
   dismiss() {
     this.viewCtrl.dismiss();

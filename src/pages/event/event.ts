@@ -11,8 +11,10 @@ import { Event } from '../../models/event';
 export class EventPage {
   event: Event;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams) {
-      this.event = this.navParams.data;
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams) {
+
+    this.event = this.navParams.data;
   }
 }

@@ -15,11 +15,13 @@ export class MyApp {
   rootPage: any = 'SignInPage';
   search: string = '';
 
-  constructor(platform: Platform,
-              statusBar: StatusBar,
-              splashScreen: SplashScreen,
-              public alertCtrl: AlertController,
-              public afAuth: AngularFireAuth) {
+  constructor(
+    platform: Platform,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    public alertCtrl: AlertController,
+    public afAuth: AngularFireAuth) {
+
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.

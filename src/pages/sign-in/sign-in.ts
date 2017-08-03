@@ -16,10 +16,11 @@ export class SignInPage {
   password: string = 'testing';
   error: string;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public loadingCtrl: LoadingController,
-              public afAuth: AngularFireAuth) { }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth) { }
 
   ionViewDidLoad() {
     setTimeout(() => {
@@ -72,9 +73,9 @@ export class SignInPage {
       email: this.email,
       password: this.password
     }, {
-      animate: true,
-      direction: 'forward'
-    });
+        animate: true,
+        direction: 'forward'
+      });
   }
 
   forgotPassword() {

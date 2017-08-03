@@ -18,10 +18,12 @@ export class SignUpPage {
   password2: string;
   error: string;
 
-  constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public loadingCtrl: LoadingController,
-              public afAuth: AngularFireAuth) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public loadingCtrl: LoadingController,
+    public afAuth: AngularFireAuth) {
+
     this.email = this.navParams.data.email;
     this.password = this.navParams.data.password;
   }

@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import { Event } from '../../models/event';
+import { Category } from '../../models/category';
 
 @IonicPage()
 @Component({
@@ -12,90 +13,66 @@ import { Event } from '../../models/event';
 })
 export class HomePage {
   title: string;
-  eventSource: Array<Event> = [];
+  eventSource: Event[] = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
   selectedDate: Date = new Date();
-  events: FirebaseListObservable<Array<any>>;
+  step: number = 15;
 
-  constructor(public navCtrl: NavController,
+  eventsObservable: FirebaseListObservable<Array<any>>;
+  events: Event[] = [];
+  categories: Category[] = [
+    { name: 'Sports', selected: true },
+    { name: 'Religion', selected: true },
+    { name: 'LGBT', selected: true },
+    { name: 'Live Music', selected: true },
+    { name: 'Performing Arts', selected: true },
+    { name: 'Visual Arts', selected: true },
+    { name: 'Children', selected: true },
+    { name: 'Fitness', selected: true },
+    { name: 'Literature', selected: true },
+    { name: 'Aerospace', selected: true },
+    { name: 'History', selected: true },
+    { name: 'DJs', selected: true },
+    { name: 'Karaoke', selected: true },
+    { name: 'Parks & Recreation', selected: true },
+    { name: 'Libraries', selected: true },
+    { name: 'Festivals/Fairs', selected: true }
+  ];
+
+  constructor(
+    public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
     public afDB: AngularFireDatabase) {
-    this.events = this.afDB.list('/events');
 
-    this.events.subscribe(events => {
-      this.eventSource = [];
+    this.eventsObservable = this.afDB.list('/events');
 
-      events.forEach(event => {
-        let calendarEvent = {
-          id: event.$key,
-          title: event.title,
-          startTime: new Date(event.startTime),
-          endTime: new Date(event.endTime),
-          allDay: event.allDay,
-          category: event.category
+    this.eventsObservable.subscribe(records => {
+      this.events = records.map(record => {
+        const event: Event = {
+          id: record.$key,
+          title: record.title,
+          startTime: new Date(record.startTime),
+          endTime: new Date(record.endTime),
+          allDay: record.allDay,
+          category: record.category
         };
 
-        /*if (calendarEvent.endTime < new Date())
-          return this.events.remove(calendarEvent.id);*/
-
-        this.eventSource.push(calendarEvent);
+        return event;
       });
+
+      this.applyFilter();
     }, console.error);
   }
 
-  generateRandomEvents() {
-    this.eventSource.forEach(event => {
-      this.events.remove(event.id);
+  applyFilter() {
+    this.eventSource = this.events.filter(event => {
+      const category = this.categories.find(category => category.name === event.category);
+      return category
+        ? category.selected
+        : true;
     });
-
-    const events = [];
-    for (let i = 0; i < 50; i++) {
-      const date = new Date();
-      const startDay = Math.floor(Math.random() * 30) - 15;
-      const endDay = Math.floor(Math.random() * 2) + startDay;
-
-      if (Math.floor(Math.random() * 2) === 0) {
-        events.push({
-          title: `All Day - ${i}`,
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay).toString(),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay === startDay ? endDay + 1 : endDay).toString(),
-          allDay: true,
-          category: 'Stuff'
-        });
-      } else {
-        const startMinute = Math.floor(Math.random() * 24 * 60);
-        const endMinute = Math.floor(Math.random() * 180) + startMinute;
-
-        events.push({
-          title: `Event - ${i}`,
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute).toString(),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute).toString(),
-          allDay: false,
-          category: 'Things'
-        });
-      }
-    }
-
-    events.forEach(event => {
-      this.events.push(event);
-    });
-  }
-
-  getCategories() {
-    const categories: string[] = [];
-    this.eventSource.forEach(event => {
-      if (categories.indexOf(event.category) === -1
-        && event.startTime.getDate() === this.selectedDate.getDate()) {
-        categories.push(event.category);
-      }
-    });
-    return categories.sort();
-  }
-
-  getEvents(category: string) {
-    return this.eventSource.filter(event => event.category === category);
   }
 
   addEvent() {
@@ -105,7 +82,17 @@ export class HomePage {
       if (!data)
         return;
 
-      this.events.push(data);
+      this.eventsObservable.push(data);
+    });
+
+    modal.present();
+  }
+
+  showFilters() {
+    let modal = this.modalCtrl.create('FiltersPage', this.categories);
+
+    modal.onDidDismiss(() => {
+      this.applyFilter();
     });
 
     modal.present();
