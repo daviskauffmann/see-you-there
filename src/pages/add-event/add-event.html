@@ -16,29 +16,32 @@
 <ion-content padding>
 
   <ion-item>
-    <ion-input placeholder="Title" [(ngModel)]="title"></ion-input>
+    <ion-label>Title</ion-label>
+    <ion-input [(ngModel)]="title"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label>Start Day</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    <ion-label>Category</ion-label>
+    <ion-input [(ngModel)]="category"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label>Start Time</ion-label>
-    <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="myDate"></ion-datetime>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>End Day</ion-label>
-    <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="startTime"></ion-datetime>
   </ion-item>
 
   <ion-item>
     <ion-label>End Time</ion-label>
-    <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="myDate"></ion-datetime>
+    <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="endTime"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>All Day</ion-label>
+    <ion-checkbox [(ngModel)]="allDay"></ion-checkbox>
   </ion-item>
 
   <button ion-button block (click)="add()">Add Event</button>
+
+  <p *ngIf="error" class="danger">{{ error }}</p>
 
 </ion-content>

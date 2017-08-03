@@ -7,10 +7,10 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'add-event.html',
 })
 export class AddEventPage {
-  title: string;
-  startTime: Date;
-  endTime: Date;
-  allDay: boolean;
+  title: string = 'Event';
+  startTime: Date = new Date();
+  endTime: Date = new Date();
+  allDay: boolean = false;
   category: string;
   error: string;
 
@@ -27,21 +27,15 @@ export class AddEventPage {
     if (!this.title)
       return this.error = 'Title required';
 
-    /*if (!this.startTime)
-      return this.error = 'Start time required';
-
-    if (!this.endTime)
-      return this.error = 'End time required';
-
     if (!this.category)
-      return this.error = 'Category required';*/
+      return this.error = 'Category required';
 
     this.viewCtrl.dismiss({
       title: this.title,
-      startTime: (this.startTime || new Date()).toString(),
-      endTime: (this.endTime || new Date()).toString(),
-      allDay: this.allDay || false,
-      category: this.category || 'Event'
+      startTime: this.startTime.toString(),
+      endTime: this.endTime.toString(),
+      allDay: this.allDay,
+      category: this.category
     });
   }
 }

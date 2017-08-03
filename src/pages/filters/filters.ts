@@ -19,15 +19,21 @@ export class FiltersPage {
     this.categories = this.navParams.data;
   }
 
-  selectAll() {
-    this.categories.forEach(category => category.selected = true);
-  }
-
-  unselectAll() {
-    this.categories.forEach(category => category.selected = false);
-  }
-
   done() {
     this.viewCtrl.dismiss();
+  }
+
+  getToggleText() {
+    return this.categories.every(category => category.selected)
+      ? 'Unselect All'
+      : 'Select All';
+  }
+
+  toggle() {
+    if (this.categories.every(category => category.selected)) {
+      this.categories.forEach(category => category.selected = false);
+    } else {
+      this.categories.forEach(category => category.selected = true);
+    }
   }
 }
