@@ -49,24 +49,26 @@ export class SignUpPage {
     });
     loader.present();
 
-    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password).then((user: User) => {
-      loader.dismiss();
+    this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
+      .then((user: User) => {
+        loader.dismiss();
 
-      user.updateProfile({
-        displayName: this.displayName,
-        photoURL: ''
+        user.updateProfile({
+          displayName: this.displayName,
+          photoURL: ''
+        });
+        user.sendEmailVerification();
+
+        this.navCtrl.setRoot('HomePage', {}, {
+          animate: true,
+          direction: 'forward'
+        });
+      })
+      .catch(err => {
+        loader.dismiss();
+
+        this.error = err.message;
       });
-      user.sendEmailVerification();
-
-      this.navCtrl.setRoot('HomePage', {}, {
-        animate: true,
-        direction: 'forward'
-      });
-    }).catch(err => {
-      loader.dismiss();
-
-      this.error = err.message;
-    });
   }
 
   cancel() {

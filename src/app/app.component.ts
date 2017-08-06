@@ -88,13 +88,14 @@ export class MyApp {
               return;
             }
 
-            this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password)).then((user: User) => {
-              user.updateProfile({
-                displayName: data.displayName,
-                photoURL: ''
+            this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password))
+              .then((user: User) => {
+                user.updateProfile({
+                  displayName: data.displayName,
+                  photoURL: ''
+                });
+                user.sendEmailVerification();
               });
-              user.sendEmailVerification();
-            });
           }
         }
       ]

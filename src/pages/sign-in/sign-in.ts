@@ -34,18 +34,20 @@ export class SignInPage {
     });
     loader.present();
 
-    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(() => {
-      loader.dismiss();
+    this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
+      .then(() => {
+        loader.dismiss();
 
-      this.navCtrl.setRoot('HomePage', {}, {
-        animate: true,
-        direction: 'forward'
+        this.navCtrl.setRoot('HomePage', {}, {
+          animate: true,
+          direction: 'forward'
+        });
+      })
+      .catch(err => {
+        loader.dismiss();
+
+        this.error = err.message;
       });
-    }).catch(err => {
-      loader.dismiss();
-
-      this.error = err.message;
-    });
   }
 
   signInAnonymously() {
@@ -54,18 +56,20 @@ export class SignInPage {
     });
     loader.present();
 
-    this.afAuth.auth.signInAnonymously().then(() => {
-      loader.dismiss();
+    this.afAuth.auth.signInAnonymously()
+      .then(() => {
+        loader.dismiss();
 
-      this.navCtrl.setRoot('HomePage', {}, {
-        animate: true,
-        direction: 'forward'
+        this.navCtrl.setRoot('HomePage', {}, {
+          animate: true,
+          direction: 'forward'
+        });
+      })
+      .catch(err => {
+        loader.dismiss();
+
+        this.error = err.message;
       });
-    }).catch(err => {
-      loader.dismiss();
-
-      this.error = err.message;
-    });
   }
 
   signUp() {
@@ -79,9 +83,10 @@ export class SignInPage {
   }
 
   forgotPassword() {
-    this.afAuth.auth.sendPasswordResetEmail(this.email).catch(err => {
-      this.error = err.message;
-    });
+    this.afAuth.auth.sendPasswordResetEmail(this.email)
+      .catch(err => {
+        this.error = err.message;
+      });
   }
 
   signInWithPhoneNumber() {

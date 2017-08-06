@@ -19,7 +19,7 @@ export class HomePage {
   selectedDate: Date = new Date();
   step: number = 15;
 
-  eventsObservable: FirebaseListObservable<Array<any>>;
+  eventsObservable: FirebaseListObservable<any[]>;
   events: Event[] = [];
   categories: Category[] = [
     { name: 'Sports', selected: true },
@@ -49,18 +49,15 @@ export class HomePage {
     this.eventsObservable = this.afDB.list('/events');
 
     this.eventsObservable.subscribe(records => {
-      this.events = records.map(record => {
-        const event: Event = {
-          id: record.$key,
-          title: record.title,
-          startTime: new Date(record.startTime),
-          endTime: new Date(record.endTime),
-          allDay: record.allDay,
-          category: record.category
-        };
-
-        return event;
-      });
+      this.events = records.map(record => ({
+        id: record.$key,
+        ownerId: record.ownerId,
+        title: record.title,
+        startTime: new Date(record.startTime),
+        endTime: new Date(record.endTime),
+        allDay: record.allDay,
+        category: record.category
+      }));
 
       this.applyFilter();
     }, console.error);

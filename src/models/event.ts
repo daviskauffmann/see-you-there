@@ -1,5 +1,6 @@
 export class Event {
   id: string;
+  ownerId: string;
   title: string;
   startTime: Date;
   endTime: Date;
