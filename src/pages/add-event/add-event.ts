@@ -7,12 +7,12 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'add-event.html',
 })
 export class AddEventPage {
-  title: string = 'EFSC vs. ';
+  title: string = '';
   startTime: string = new Date().toISOString();
   endTime: string = new Date().toISOString();
   allDay: boolean = false;
-  category: string = 'Sports';
-  subCategory: string = 'Soccer';
+  category: string = 'Live Music';
+  subCategory: string = '';
   location: string;
   error: string;
 

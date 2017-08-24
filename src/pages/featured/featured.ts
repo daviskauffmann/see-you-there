@@ -12,20 +12,20 @@ export class FeaturedPage {
   owners: Owner[] = [
     {
       id: '0',
-      name: 'Thing',
-      bio: 'Stuff',
+      name: 'Advertiser Name',
+      bio: 'Advertiser Description',
       imageUrl: 'http://lorempixel.com/400/200/'
     },
     {
       id: '1',
-      name: 'Thing',
-      bio: 'Stuff',
+      name: 'Advertiser Name',
+      bio: 'Advertiser Description',
       imageUrl: 'http://lorempixel.com/400/200/'
     },
     {
       id: '2',
-      name: 'Thing',
-      bio: 'Stuff',
+      name: 'Advertiser Name',
+      bio: 'Advertiser Description',
       imageUrl: 'http://lorempixel.com/400/200/'
     }
   ];

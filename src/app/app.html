@@ -4,6 +4,8 @@
 
     <ion-list *ngIf="!afAuth.auth.currentUser">
 
+      <ion-list-header>Welcome!</ion-list-header>
+
       <button ion-item (click)="signIn()">Sign In</button>
       <button ion-item (click)="signUp()">Sign Up</button>
 
@@ -18,7 +20,7 @@
 
     <ion-list *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous">
 
-      <ion-list-header> {{ afAuth.auth.currentUser.displayName || afAuth.auth.currentUser.email }}</ion-list-header>
+      <ion-list-header>Welcome back, {{ afAuth.auth.currentUser.displayName || afAuth.auth.currentUser.email }}!</ion-list-header>
 
       <button ion-item (click)="updateProfile()">Update Profile</button>
       <button ion-item (click)="updateEmail()">Update Email</button>

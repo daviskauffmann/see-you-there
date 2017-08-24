@@ -10,15 +10,16 @@
 
   <ion-card>
 
-    <img src="http://lorempixel.com/400/200/" />
+    <img *ngIf="event.imageUrl" [src]="event.imageUrl" />
 
     <ion-card-header>
       <h1 text-wrap>{{ event.title }}</h1>
-      <p>{{ event.category }} | {{ event.subCategory }}</p>
+      <p>{{ event.category }}</p>
+      <p *ngIf="event.subCategory">{{ event.subCategory }}</p>
     </ion-card-header>
 
     <ion-card-content>
-      <p></p>
+      <p>{{ event.description }}</p>
     </ion-card-content>
 
   </ion-card>
@@ -43,7 +44,7 @@
       <p>{{ event.location }}</p>
     </ion-card-header>
 
-    <ion-card-content></ion-card-content>
+    <ion-card-content><!-- MAP --></ion-card-content>
 
   </ion-card>
 

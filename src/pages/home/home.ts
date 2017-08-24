@@ -58,7 +58,9 @@ export class HomePage {
         allDay: record.allDay,
         category: record.category,
         subCategory: record.subCategory,
-        location: record.location
+        location: record.location,
+        description: record.description,
+        imageUrl: record.imageUrl
       }));
 
       this.applyFilter();

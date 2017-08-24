@@ -8,4 +8,6 @@ export class Event {
   category: string;
   subCategory: string;
   location: string;
+  description: string;
+  imageUrl: string;
 }
