@@ -1,6 +1,6 @@
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="primary">
 
     <ion-title>Add Event</ion-title>
 
@@ -23,6 +23,16 @@
   <ion-item>
     <ion-label>Category</ion-label>
     <ion-input [(ngModel)]="category"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label>Subcategory</ion-label>
+      <ion-input [(ngModel)]="subCategory"></ion-input>
+    </ion-item>
+
+  <ion-item>
+    <ion-label>Location</ion-label>
+    <ion-input [(ngModel)]="location"></ion-input>
   </ion-item>
 
   <ion-item>

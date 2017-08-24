@@ -6,4 +6,6 @@ export class Event {
   endTime: Date;
   allDay: boolean;
   category: string;
+  subCategory: string;
+  location: string;
 }

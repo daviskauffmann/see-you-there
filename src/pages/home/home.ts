@@ -56,11 +56,13 @@ export class HomePage {
         startTime: new Date(record.startTime),
         endTime: new Date(record.endTime),
         allDay: record.allDay,
-        category: record.category
+        category: record.category,
+        subCategory: record.subCategory,
+        location: record.location
       }));
 
       this.applyFilter();
-    }, console.error);
+    });
   }
 
   applyFilter() {

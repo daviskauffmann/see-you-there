@@ -2,6 +2,13 @@
 
   <ion-content>
 
+    <ion-list *ngIf="!afAuth.auth.currentUser">
+
+      <button ion-item (click)="signIn()">Sign In</button>
+      <button ion-item (click)="signUp()">Sign Up</button>
+
+    </ion-list>
+
     <ion-list *ngIf="afAuth.auth.currentUser && afAuth.auth.currentUser.isAnonymous">
 
       <button ion-item (click)="upgradeAccount()">Upgrade Account</button>

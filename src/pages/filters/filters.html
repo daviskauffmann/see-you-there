@@ -11,7 +11,11 @@
   </ion-navbar>
 
   <ion-toolbar>
-    <button ion-button clear (click)="toggle()">{{ getToggleText() }}</button>
+
+    <ion-buttons>
+      <button ion-button (click)="toggle()">{{ getToggleText() }}</button>
+    </ion-buttons>
+
   </ion-toolbar>
 
 </ion-header>

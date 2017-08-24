@@ -1,0 +1,31 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+
+    <button ion-button icon-only menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+
+    <ion-title>Featured</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+  <ion-card *ngFor="let owner of owners">
+
+    <img [src]="owner.imageUrl" />
+
+    <ion-card-content>
+
+      <ion-card-title>{{ owner.name }}</ion-card-title>
+
+      <p>{{ owner.bio }}</p>
+
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

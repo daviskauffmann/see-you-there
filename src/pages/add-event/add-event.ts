@@ -7,11 +7,13 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
   templateUrl: 'add-event.html',
 })
 export class AddEventPage {
-  title: string = 'Event';
-  startTime: Date = new Date();
-  endTime: Date = new Date();
+  title: string = 'EFSC vs. ';
+  startTime: string = new Date().toISOString();
+  endTime: string = new Date().toISOString();
   allDay: boolean = false;
-  category: string;
+  category: string = 'Sports';
+  subCategory: string = 'Soccer';
+  location: string;
   error: string;
 
   constructor(
@@ -30,12 +32,17 @@ export class AddEventPage {
     if (!this.category)
       return this.error = 'Category required';
 
+    if (!this.location)
+      return this.error = 'Location required';
+
     this.viewCtrl.dismiss({
       title: this.title,
-      startTime: this.startTime.toString(),
-      endTime: this.endTime.toString(),
+      startTime: new Date(this.startTime).toString(),
+      endTime: new Date(this.endTime).toString(),
       allDay: this.allDay,
-      category: this.category
+      category: this.category,
+      subCategory: this.subCategory,
+      location: this.location
     });
   }
 }

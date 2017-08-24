@@ -10,18 +10,15 @@
 
   <ion-card>
 
-    <img src="http://placehold.it/300x200" />
+    <img src="http://lorempixel.com/400/200/" />
 
     <ion-card-header>
-      <h1>{{ event.title }}</h1>
-      <p>{{ event.category }}</p>
+      <h1 text-wrap>{{ event.title }}</h1>
+      <p>{{ event.category }} | {{ event.subCategory }}</p>
     </ion-card-header>
 
     <ion-card-content>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-        sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <p></p>
     </ion-card-content>
 
   </ion-card>
@@ -43,6 +40,7 @@
 
     <ion-card-header>
       <h1>Location</h1>
+      <p>{{ event.location }}</p>
     </ion-card-header>
 
     <ion-card-content></ion-card-content>

@@ -12,7 +12,7 @@ import { auth, User } from 'firebase/app';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = 'SignInPage';
+  rootPage: any = 'TabsPage';
   search: string = '';
 
   constructor(
@@ -28,12 +28,103 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
 
-    this.afAuth.auth.onAuthStateChanged((user: User) => {
-      if (user) {
-        this.rootPage = 'HomePage';
-      }
-    });
+  signIn() {
+    this.alertCtrl.create({
+      title: 'Sign Up',
+      inputs: [
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email',
+          value: 'test@test.com'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password',
+          value: 'testing'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.afAuth.auth.signInWithEmailAndPassword(data.email, data.password);
+          }
+        }
+      ]
+    }).present();
+  }
+
+  signUp() {
+    this.alertCtrl.create({
+      title: 'Sign Up',
+      inputs: [
+        {
+          name: 'displayName',
+          placeholder: 'Display Name',
+          type: 'text',
+          value: 'Test'
+        },
+        {
+          name: 'email',
+          placeholder: 'Email',
+          type: 'email',
+          value: 'test@test.com'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password',
+          value: 'testing'
+        },
+        {
+          name: 'password2',
+          placeholder: 'Confirm Password',
+          type: 'password',
+          value: 'testing'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            if (!data.displayName) {
+              return;
+            }
+
+            if (!data.email) {
+              return;
+            }
+
+            if (!data.password) {
+              return;
+            }
+
+            if (data.password !== data.password2) {
+              return;
+            }
+
+            this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
+              .then((user: User) => {
+                user.updateProfile({
+                  displayName: data.displayName,
+                  photoURL: ''
+                });
+                user.sendEmailVerification();
+              });
+          }
+        }
+      ]
+    }).present();
   }
 
   upgradeAccount() {
@@ -109,12 +200,14 @@ export class MyApp {
         {
           name: 'displayName',
           placeholder: 'Display Name',
-          type: 'text'
+          type: 'text',
+          value: this.afAuth.auth.currentUser.displayName
         },
         {
           name: 'photoURL',
           placeholder: 'Photo URL',
-          type: 'text'
+          type: 'text',
+          value: this.afAuth.auth.currentUser.photoURL
         }
       ],
       buttons: [
@@ -141,7 +234,8 @@ export class MyApp {
         {
           name: 'email',
           placeholder: 'Email',
-          type: 'email'
+          type: 'email',
+          value: this.afAuth.auth.currentUser.email
         }
       ],
       buttons: [
@@ -198,20 +292,10 @@ export class MyApp {
   }
 
   deleteAccount() {
-    this.afAuth.auth.currentUser.delete().then(() => {
-      this.nav.setRoot('SignInPage', {}, {
-        animate: true,
-        direction: 'back'
-      });
-    });
+    this.afAuth.auth.currentUser.delete();
   }
 
   signOut() {
-    this.afAuth.auth.signOut().then(() => {
-      this.nav.setRoot('SignInPage', {}, {
-        animate: true,
-        direction: 'back'
-      });
-    });
+    this.afAuth.auth.signOut();
   }
 }
