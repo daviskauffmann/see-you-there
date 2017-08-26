@@ -14,19 +14,19 @@ export class FeaturedPage {
       id: '0',
       name: 'Advertiser Name',
       bio: 'Advertiser Description',
-      imageUrl: 'http://lorempixel.com/400/200/'
+      imageUrl: 'http://via.placeholder.com/350x150'
     },
     {
       id: '1',
       name: 'Advertiser Name',
       bio: 'Advertiser Description',
-      imageUrl: 'http://lorempixel.com/400/200/'
+      imageUrl: 'http://via.placeholder.com/350x150'
     },
     {
       id: '2',
       name: 'Advertiser Name',
       bio: 'Advertiser Description',
-      imageUrl: 'http://lorempixel.com/400/200/'
+      imageUrl: 'http://via.placeholder.com/350x150'
     }
   ];
 
