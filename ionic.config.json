@@ -1,5 +1,8 @@
 {
   "name": "see-you-there",
   "app_id": "57380b42",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
