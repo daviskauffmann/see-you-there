@@ -292,10 +292,36 @@ export class MyApp {
   }
 
   deleteAccount() {
-    this.afAuth.auth.currentUser.delete();
+    this.alertCtrl.create({
+      title: 'Delete Account',
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.afAuth.auth.currentUser.delete();
+          }
+        }
+      ]
+    }).present();
   }
 
   signOut() {
-    this.afAuth.auth.signOut();
+    this.alertCtrl.create({
+      title: 'Sign Out',
+      buttons: [
+        {
+          text: 'Cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: () => {
+            this.afAuth.auth.signOut();
+          }
+        }
+      ]
+    }).present();
   }
 }

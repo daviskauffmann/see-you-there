@@ -11,7 +11,7 @@ export class AddEventPage {
   startTime: string = new Date().toISOString();
   endTime: string = new Date().toISOString();
   allDay: boolean = false;
-  category: string = 'Live Music';
+  category: string = '';
   subCategory: string = '';
   location: string;
   error: string;

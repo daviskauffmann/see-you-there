@@ -8,13 +8,13 @@ import { Category } from '../../models/category';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-efsc',
+  templateUrl: 'efsc.html',
 })
-export class HomePage {
-  title: string;
+export class EfscPage {
+  title: string = 'EFSC Events';
   eventSource: Event[] = [];
-  calendarMode: string = 'day';
+  calendarMode: string = 'week';
   currentDate: Date = new Date();
   selectedDate: Date = new Date();
   step: number = 15;

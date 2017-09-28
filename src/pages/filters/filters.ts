@@ -17,6 +17,12 @@ export class FiltersPage {
     public viewCtrl: ViewController) {
 
     this.categories = this.navParams.data;
+
+    this.categories.sort((a, b) => a.name < b.name
+      ? -1
+      : a.name > b.name
+        ? 1
+        : 0);
   }
 
   done() {

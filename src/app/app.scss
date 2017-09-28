@@ -16,6 +16,7 @@
   font-family: 'Open Sans';
 }
 
+/*
 .dayview-allday-label,
 .calendar-hour-column {
   width: 50px !important;
@@ -27,4 +28,58 @@
   height: 2.6rem;
   font-size: 1.2rem;
   line-height: 2.5rem;
+}
+
+
+ion-navbar {
+  ion-title {
+    color: #fff;
+  }
+}
+*/
+
+// Global Toolbar
+
+.toolbar-md-primary .bar-button-clear-md,
+.toolbar-md-primary .bar-button-default-md,
+.toolbar-md-primary .bar-button-outline-md,
+.toolbar-md-primary .toolbar-title-md {
+  color: #fff;
+}
+
+.toolbar-title-md {
+  padding: 0 8px;
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+// Segment
+.segment-md {
+  .segment-button {
+    color: map-get($colors, secondary);
+    border: none;
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  .segment-button.segment-activated {
+    color: #fff;
+    background-color: map-get($colors, primary);
+  }
+}
+
+ion-toolbar.cal-segment.toolbar.toolbar-md {
+  padding: 0px;
+}
+
+// Calendar - Day-view
+td.calendar-hour-column.text-center {
+  color: map-get($colors, primary);
+}
+
+.dayview-allday-label, .calendar-hour-column {
+  font-size: 2.4rem;
+  font-weight: 600;
+  text-align: center;
+  max-width: 75px;
 }

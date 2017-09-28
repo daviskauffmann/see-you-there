@@ -19,7 +19,7 @@
 
   </ion-navbar>
 
-  <ion-toolbar>
+  <ion-toolbar class="cal-segment">
 
     <ion-segment [(ngModel)]="calendarMode">
 
@@ -34,7 +34,8 @@
 
 <ion-content>
 
-  <calendar [calendarMode]="calendarMode" [currentDate]="currentDate" [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onTitleChanged($event)"></calendar>
+  <calendar formatDayTitle="MMMM dd" preserveScrollPosition="true" [lockSwipeToPrev]="lockSwipeToPrev" [calendarMode]="calendarMode" [currentDate]="currentDate"
+    [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTimeSelected)="onTimeSelected($event)" (onTitleChanged)="onTitleChanged($event)"></calendar>
 
 </ion-content>
