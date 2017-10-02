@@ -75,11 +75,13 @@ ion-toolbar.cal-segment.toolbar.toolbar-md {
 // Calendar - Day-view
 td.calendar-hour-column.text-center {
   color: map-get($colors, primary);
+  font-size: 3rem;
 }
 
 .dayview-allday-label, .calendar-hour-column {
   font-size: 2.4rem;
   font-weight: 600;
   text-align: center;
-  max-width: 75px;
+  // max-width: 75px;
+  width: 100px !important;
 }
