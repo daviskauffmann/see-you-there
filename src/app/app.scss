@@ -17,15 +17,19 @@
 }
 
 // Global Toolbar
-
 .toolbar-md-primary .bar-button-clear-md,
 .toolbar-md-primary .bar-button-default-md,
 .toolbar-md-primary .bar-button-outline-md,
-.toolbar-md-primary .toolbar-title-md {
+.toolbar-md-primary .toolbar-title-md,
+.toolbar-ios-primary .bar-button-clear-ios,
+.toolbar-ios-primary .bar-button-default-ios,
+.toolbar-ios-primary .bar-button-outline-ios,
+.toolbar-ios-primary .toolbar-title-ios {
   color: #fff;
 }
 
-.toolbar-title-md {
+.toolbar-title-md,
+.toolbar-title-ios {
   padding: 0 8px;
   font-size: 3rem;
   font-weight: 700;
@@ -46,12 +50,24 @@
   }
 }
 
+.segment-ios {
+  .segment-button {
+    color: map-get($colors, primary);
+    font-size: 1.6rem;
+    font-weight: 700;
+    max-width: none;
+    margin: 0 50px;
+  }
+  .segment-button.segment-activated {
+    color: #fff;
+  }
+}
+
 ion-toolbar.cal-segment.toolbar.toolbar-md {
   padding: 0px;
 }
 
 // Calendar global table properties
-
 th {
   background-color: map-get($colors, secondary);
   color: #fff;
@@ -63,18 +79,17 @@ td.calendar-hour-column.text-center {
   font-size: 3rem;
 }
 
-.dayview-allday-label, .calendar-hour-column {
+.dayview-allday-label,
+.calendar-hour-column {
   font-size: 2.4rem;
   font-weight: 600;
-  text-align: center;
-  // max-width: 75px;
+  text-align: center; // max-width: 75px;
   width: 100px !important;
 }
 
 // Calendar - Week-view
-
-
 // Calendar - Month-view
+
 /*
 HIGH PRIORITY.. table.table.table-bordered.table-fixed.monthview-datetable
 Take class "table-bordered" off of this element... How?
@@ -86,55 +101,41 @@ Make sure solution works when wiping to prev and next months.
 }
 
 table.table.table-fixed.monthview-datetable {
-
-  thead:first-child > tr:first-child > th {
+  thead:first-child>tr:first-child>th {
     padding: 1rem 0;
   }
-
-  & > tbody > tr > td, &[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1] {
+  &>tbody>tr>td,
+  &[_ngcontent-c1]>tbody[_ngcontent-c1]>tr[_ngcontent-c1]>td[_ngcontent-c1] {
     padding: 1.6rem 1rem;
   }
-
   th {
     text-transform: uppercase;
     font-size: 2.2rem;
   }
-
-  td { // LOW PRIORITY.. add zero before single-digit dates in month-view
+  td {
+    // LOW PRIORITY.. add zero before single-digit dates in month-view
     font-weight: 700;
     color: map-get($colors, secondary);
-
     &.text-muted {
-        color: map-get($colors, tertiary);
-      }
-
+      color: map-get($colors, tertiary);
+    }
     &.monthview-current {
       background-color: map-get($colors, tertiary);
-
       &.text-muted {
         color: map-get($colors, secondary);
       }
     }
-
     &.monthview-selected[_ngcontent-c1] {
       color: #fff;
       background-color: map-get($colors, primary);
     }
-
     &.monthview-primary-with-event {
       background-color: transparent;
       color: map-get($colors, primary);
     }
-
     &.monthview-secondary-with-event {
       background-color: transparent;
-      color: rgba(242,210,53,0.4);
-
+      color: rgba(242, 210, 53, 0.4);
     }
   }
-
 }
-
-
-
-
