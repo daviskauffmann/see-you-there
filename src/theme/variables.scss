@@ -50,7 +50,7 @@ $colors: (
 
   tertiary:   #e1e1e1,
 
-  light:      #f6f6f6, //watermark
+  light:      #f6f6f6, //watermark rgba(243,243,88,0.2)
   dark:       #222,
   danger:     #f53d3d,
 
@@ -73,8 +73,6 @@ $colors: (
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-
-
 
 
 // App Windows Variables
@@ -107,4 +105,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800);

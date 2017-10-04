@@ -16,28 +16,6 @@
   font-family: 'Open Sans';
 }
 
-/*
-.dayview-allday-label,
-.calendar-hour-column {
-  width: 50px !important;
-  font-size: 12px;
-}
-
-.toolbar-ios .segment-button {
-  max-width: 9999px;
-  height: 2.6rem;
-  font-size: 1.2rem;
-  line-height: 2.5rem;
-}
-
-
-ion-navbar {
-  ion-title {
-    color: #fff;
-  }
-}
-*/
-
 // Global Toolbar
 
 .toolbar-md-primary .bar-button-clear-md,
@@ -72,6 +50,13 @@ ion-toolbar.cal-segment.toolbar.toolbar-md {
   padding: 0px;
 }
 
+// Calendar global table properties
+
+th {
+  background-color: map-get($colors, secondary);
+  color: #fff;
+}
+
 // Calendar - Day-view
 td.calendar-hour-column.text-center {
   color: map-get($colors, primary);
@@ -85,3 +70,71 @@ td.calendar-hour-column.text-center {
   // max-width: 75px;
   width: 100px !important;
 }
+
+// Calendar - Week-view
+
+
+// Calendar - Month-view
+/*
+HIGH PRIORITY.. table.table.table-bordered.table-fixed.monthview-datetable
+Take class "table-bordered" off of this element... How?
+Make sure solution works when wiping to prev and next months.
+*/
+
+.swiper-slide {
+  font-size: 2.6rem;
+}
+
+table.table.table-fixed.monthview-datetable {
+
+  thead:first-child > tr:first-child > th {
+    padding: 1rem 0;
+  }
+
+  & > tbody > tr > td, &[_ngcontent-c1] > tbody[_ngcontent-c1] > tr[_ngcontent-c1] > td[_ngcontent-c1] {
+    padding: 1.6rem 1rem;
+  }
+
+  th {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+  }
+
+  td { // LOW PRIORITY.. add zero before single-digit dates in month-view
+    font-weight: 700;
+    color: map-get($colors, secondary);
+
+    &.text-muted {
+        color: map-get($colors, tertiary);
+      }
+
+    &.monthview-current {
+      background-color: map-get($colors, tertiary);
+
+      &.text-muted {
+        color: map-get($colors, secondary);
+      }
+    }
+
+    &.monthview-selected[_ngcontent-c1] {
+      color: #fff;
+      background-color: map-get($colors, primary);
+    }
+
+    &.monthview-primary-with-event {
+      background-color: transparent;
+      color: map-get($colors, primary);
+    }
+
+    &.monthview-secondary-with-event {
+      background-color: transparent;
+      color: rgba(242,210,53,0.4);
+
+    }
+  }
+
+}
+
+
+
+
