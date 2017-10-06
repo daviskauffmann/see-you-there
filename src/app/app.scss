@@ -14,6 +14,9 @@
 // automatically applied to the <body> element in the app.
 * {
   font-family: 'Open Sans';
+  // font-family: 'Comic Sans MS';
+  // color: magenta !important;
+  // background-color: lime !important;
 }
 
 // Global Toolbar
@@ -34,6 +37,10 @@
   font-size: 3rem;
   font-weight: 700;
   text-align: center;
+}
+
+.toolbar-title-ios {
+  font-size: 2rem;
 }
 
 // Segment
@@ -91,7 +98,7 @@ td.calendar-hour-column.text-center {
 // Calendar - Month-view
 
 /*
-HIGH PRIORITY.. table.table.table-bordered.table-fixed.monthview-datetable
+UNDECIDED.. table.table.table-bordered.table-fixed.monthview-datetable
 Take class "table-bordered" off of this element... How?
 Make sure solution works when wiping to prev and next months.
 */
@@ -113,7 +120,6 @@ table.table.table-fixed.monthview-datetable {
     font-size: 2.2rem;
   }
   td {
-    // LOW PRIORITY.. add zero before single-digit dates in month-view
     font-weight: 700;
     color: map-get($colors, secondary);
     &.text-muted {
@@ -138,4 +144,9 @@ table.table.table-fixed.monthview-datetable {
       color: rgba(242, 210, 53, 0.4);
     }
   }
+}
+
+// Buttons
+.button-ios {
+  color: #fff;
 }

@@ -10,11 +10,8 @@
 
     <ion-buttons end>
       <button ion-button icon-only (click)="showFilters()">
-        <ion-icon name="options"></ion-icon>
+        <ion-icon name="funnel"></ion-icon>
       </button>
-      <!--button ion-button icon-only (click)="addEvent()">
-        <ion-icon name="add"></ion-icon>
-      </button-->
     </ion-buttons>
 
   </ion-navbar>
@@ -34,10 +31,14 @@
 
 <ion-content>
 
+  <ion-fab bottom right>
+    <button ion-fab mini (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
   <div class="logo-overlay"></div>
 
-  <calendar formatDayTitle="MMMM dd" preserveScrollPosition="true" [lockSwipeToPrev]="lockSwipeToPrev" [calendarMode]="calendarMode" [currentDate]="currentDate"
-    [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
-    (onTimeSelected)="onTimeSelected($event)" (onTitleChanged)="onTitleChanged($event)"></calendar>
+  <calendar formatDayTitle="MMMM dd" preserveScrollPosition="true" [lockSwipeToPrev]="lockSwipeToPrev" [calendarMode]="calendarMode"
+    [currentDate]="currentDate" [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onEventSelected)="onEventSelected($event)" (onTimeSelected)="onTimeSelected($event)" (onTitleChanged)="onTitleChanged($event)"></calendar>
 
 </ion-content>
