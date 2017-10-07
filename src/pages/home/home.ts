@@ -19,6 +19,11 @@ export class HomePage {
   selectedDate: Date = new Date();
   step: number = 15;
   lockSwipeToPrev = false;
+  dateFormatter = {
+    formatDayViewTitle: (date: Date) => {
+      return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getDate()}`;
+    }
+  };
 
   eventsObservable: FirebaseListObservable<any[]>;
   events: Event[] = [];
