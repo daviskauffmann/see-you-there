@@ -1,0 +1,85 @@
+.ios,
+.md {
+  page-splash {
+    .scroll-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: #eddc90;
+      background: -moz-linear-gradient(45deg, #eddc90 0%, #f2d235 50%, #eddc90 100%);
+      background: -webkit-linear-gradient(45deg, #eddc90 0%, #f2d235 50%, #eddc90 100%);
+      background: linear-gradient(45deg, #eddc90 0%, #f2d235 50%, #eddc90 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eddc90', endColorstr='#eddc90', GradientType=1);
+    }
+    #logo {
+      width: 100%;
+      height: 25%;
+      overflow: visible;
+    }
+    .name {
+      color: #fff;
+      font-weight: 400;
+      font-size: 2.5rem;
+      opacity: 0;
+      animation: fade-in 1s linear 2s forwards;
+    }
+    #petal1 {
+      opacity: 0;
+      transform: translateY(-100vh);
+      animation: primary-petal 1s forwards, fade-in 1s forwards;
+    }
+    #petal2 {
+      opacity: 0;
+      transform: rotate(270deg);
+      transform-origin: center left;
+      animation: secondary-petal 1s 1s forwards, fade-in 1s 1s forwards;
+    }
+    #petal3 {
+      opacity: 0;
+      transform: rotate(90deg);
+      transform-origin: center right;
+      animation: secondary-petal 1s 1s forwards, fade-in 1s 1s forwards;
+    }
+    #petal4 {
+      opacity: 0;
+      transform: rotate(180deg);
+      transform-origin: top center;
+      animation: secondary-petal 1s 1s forwards, fade-in 1s 1s forwards;
+    }
+    #line1 {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw-line 1s linear 2s forwards;
+    }
+    #line2 {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw-line 1s linear 2.25s forwards;
+    }
+  }
+}
+
+@keyframes primary-petal {
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes secondary-petal {
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes draw-line {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  100% {
+    opacity: 1;
+  }
+}
