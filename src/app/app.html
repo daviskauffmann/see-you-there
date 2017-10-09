@@ -1,38 +1,55 @@
-<ion-menu [content]="menu">
+<!--ion-split-pane-->
+<ion-menu [content]="content">
+  <ion-header>
+    <ion-navbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-navbar>
+  </ion-header>
 
   <ion-content>
+    <ion-list>
+      <ion-list-header *ngIf="!afAuth.auth.currentUser">Welcome!</ion-list-header>
+      <ion-list-header *ngIf="afAuth.auth.currentUser && afAuth.auth.currentUser.isAnonymous">Welcome back, Anonymous!</ion-list-header>
+      <ion-list-header *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous">Welcome back, {{ afAuth.auth.currentUser.displayName || afAuth.auth.currentUser.email }}!</ion-list-header>
 
-    <ion-list *ngIf="!afAuth.auth.currentUser">
+      <button ion-item *ngIf="!afAuth.auth.currentUser" (click)="signIn()">
+        <ion-icon name="log-in" item-left></ion-icon>Sign In
+      </button>
 
-      <ion-list-header>Welcome!</ion-list-header>
+      <button ion-item *ngIf="!afAuth.auth.currentUser" (click)="signUp()">
+        <ion-icon name="create" item-left></ion-icon>Sign Up
+      </button>
 
-      <button ion-item (click)="signIn()">Sign In</button>
-      <button ion-item (click)="signUp()">Sign Up</button>
+      <button ion-item *ngIf="afAuth.auth.currentUser && afAuth.auth.currentUser.isAnonymous" (click)="upgradeAccount()">
+        <ion-icon name="arrow-up" item-left></ion-icon>Upgrade Account
+      </button>
 
+      <button ion-item *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous" (click)="updateProfile()">
+        <ion-icon name="person" item-left></ion-icon>Update Profile
+      </button>
+
+      <button ion-item *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous" (click)="updateEmail()">
+        <ion-icon name="mail" item-left></ion-icon>Update Email
+      </button>
+
+      <button ion-item *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous" (click)="updatePassword()">
+        <ion-icon name="lock" item-left></ion-icon>Update Password
+      </button>
+
+      <button ion-item *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous" (click)="resendVerification()">
+        <ion-icon name="checkmark" item-left></ion-icon>Resend Verification
+      </button>
+
+      <button ion-item *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous" (click)="deleteAccount()">
+        <ion-icon name="trash" item-left></ion-icon>Delete Account
+      </button>
+
+      <button ion-item *ngIf="afAuth.auth.currentUser" (click)="signOut()">
+        <ion-icon name="log-out" item-left></ion-icon>Sign Out
+      </button>
     </ion-list>
-
-    <ion-list *ngIf="afAuth.auth.currentUser && afAuth.auth.currentUser.isAnonymous">
-
-      <button ion-item (click)="upgradeAccount()">Upgrade Account</button>
-      <button ion-item (click)="signOut()">Sign Out</button>
-
-    </ion-list>
-
-    <ion-list *ngIf="afAuth.auth.currentUser && !afAuth.auth.currentUser.isAnonymous">
-
-      <ion-list-header>Welcome back, {{ afAuth.auth.currentUser.displayName || afAuth.auth.currentUser.email }}!</ion-list-header>
-
-      <button ion-item (click)="updateProfile()">Update Profile</button>
-      <button ion-item (click)="updateEmail()">Update Email</button>
-      <button ion-item (click)="updatePassword()">Update Password</button>
-      <button ion-item (click)="resendVerification()">Resend Verification</button>
-      <button ion-item (click)="deleteAccount()">Delete Account</button>
-      <button ion-item (click)="signOut()">Sign Out</button>
-
-    </ion-list>
-
   </ion-content>
-
 </ion-menu>
 
-<ion-nav #menu [root]="rootPage"></ion-nav>
+<ion-nav main #content [root]="root"></ion-nav>
+<!--/ion-split-pane-->

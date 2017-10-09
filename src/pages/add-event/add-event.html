@@ -8,49 +8,47 @@
       <button ion-button (click)="dismiss()">Cancel</button>
     </ion-buttons>
 
+    <ion-buttons end>
+      <button ion-button (click)="add()">Add</button>
+    </ion-buttons>
+
   </ion-navbar>
+
+  <ion-toolbar color="primary">
+    <ion-item>
+      <ion-input placeholder="Title" [(ngModel)]="title" required></ion-input>
+    </ion-item>
+  </ion-toolbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
   <ion-item>
-    <ion-label>Title</ion-label>
-    <ion-input [(ngModel)]="title"></ion-input>
+    <ion-label>All-day</ion-label>
+    <ion-toggle [(ngModel)]="allDay"></ion-toggle>
   </ion-item>
 
   <ion-item>
-    <ion-label>Category</ion-label>
-    <ion-input [(ngModel)]="category"></ion-input>
-  </ion-item>
-
-  <ion-item>
-      <ion-label>Subcategory</ion-label>
-      <ion-input [(ngModel)]="subCategory"></ion-input>
-    </ion-item>
-
-  <ion-item>
-    <ion-label>Location</ion-label>
-    <ion-input [(ngModel)]="location"></ion-input>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>Start Time</ion-label>
     <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="startTime"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label>End Time</ion-label>
     <ion-datetime displayFormat="MMM DD, YYYY HH:mm" [(ngModel)]="endTime"></ion-datetime>
   </ion-item>
 
   <ion-item>
-    <ion-label>All Day</ion-label>
-    <ion-checkbox [(ngModel)]="allDay"></ion-checkbox>
+    <ion-label><ion-icon name="list"></ion-icon></ion-label>
+    <ion-input placeholder="Category" [(ngModel)]="category" required></ion-input>
   </ion-item>
 
-  <button ion-button block (click)="add()">Add Event</button>
+  <ion-item>
+    <ion-input placeholder="Subcategory" [(ngModel)]="subCategory"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input placeholder="Location" [(ngModel)]="location" required></ion-input>
+  </ion-item>
 
   <p *ngIf="error" class="danger">{{ error }}</p>
 

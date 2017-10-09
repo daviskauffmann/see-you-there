@@ -80,28 +80,42 @@ th {
 }
 
 // Calendar - Day-view
-td.calendar-hour-column.text-center {
-  color: map-get($colors, primary);
-  font-size: 3rem;
-}
-
 .dayview-allday-label,
 .calendar-hour-column {
-  font-size: 2.4rem;
-  font-weight: 600;
-  text-align: center; // max-width: 75px;
-  width: 100px !important;
+  width: 80px !important; //fix
+}
+
+td.calendar-hour-column.text-center {
+  color: map-get($colors, secondary);
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.dayview-container {
+  .table>tbody>tr>td.calendar-hour-column {
+    line-height: normal;
+  }
+}
+
+.dayview-allday-table {
+  background-color: map-get($colors, secondary);
+  .dayview-allday-label {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    padding-top: 15px; // display: inline-block;
+    // vertical-align: middle;
+    // line-height: normal;
+  }
+}
+
+.calendar-event-inner[_ngcontent-c0] {
+  // font-size: 1.5rem;
+  // line-height: normal;
 }
 
 // Calendar - Week-view
 // Calendar - Month-view
-
-/*
-UNDECIDED.. table.table.table-bordered.table-fixed.monthview-datetable
-Take class "table-bordered" off of this element... How?
-Make sure solution works when wiping to prev and next months.
-*/
-
 .swiper-slide {
   font-size: 2.6rem;
 }

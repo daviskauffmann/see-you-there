@@ -86,8 +86,7 @@ export class HomePage {
     let modal = this.modalCtrl.create('AddEventPage');
 
     modal.onDidDismiss(data => {
-      if (!data)
-        return;
+      if (!data) return;
 
       this.eventsObservable.push(data);
     });

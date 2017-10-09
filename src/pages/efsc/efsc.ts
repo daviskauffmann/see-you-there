@@ -14,11 +14,12 @@ import { Category } from '../../models/category';
 export class EfscPage {
   title: string = 'EFSC Events';
   eventSource: Event[] = [];
-  calendarMode: string = 'week';
+  calendarMode: string = 'day';
   currentDate: Date = new Date();
   selectedDate: Date = new Date();
   step: number = 15;
   lockSwipeToPrev = false;
+  weekday: string = '';
 
   eventsObservable: FirebaseListObservable<any[]>;
   events: Event[] = [];
@@ -81,8 +82,7 @@ export class EfscPage {
     let modal = this.modalCtrl.create('AddEventPage');
 
     modal.onDidDismiss(data => {
-      if (!data)
-        return;
+      if (!data) return;
 
       this.eventsObservable.push(data);
     });

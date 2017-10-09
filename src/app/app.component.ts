@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { AlertController, ModalController, Nav, Platform } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { AlertController, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -10,17 +10,13 @@ import { auth, User } from 'firebase/app';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
-  rootPage: any = 'TabsPage';
-  search: string = '';
+  root: any = 'SplashPage';
 
   constructor(
     platform: Platform,
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public alertCtrl: AlertController,
-    public modalCtrl: ModalController,
     public afAuth: AngularFireAuth) {
 
     platform.ready().then(() => {
@@ -28,7 +24,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       // splashScreen.hide();
-      modalCtrl.create('SplashPage').present();
     });
   }
 

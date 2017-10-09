@@ -22,9 +22,7 @@ export const firebaseConfig = {
 };
 
 @NgModule({
-  declarations: [
-    MyApp
-  ],
+  declarations: [MyApp],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
@@ -34,9 +32,7 @@ export const firebaseConfig = {
     NgCalendarModule
   ],
   bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp
-  ],
+  entryComponents: [MyApp],
   providers: [
     StatusBar,
     SplashScreen,

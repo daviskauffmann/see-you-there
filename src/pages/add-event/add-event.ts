@@ -26,19 +26,29 @@ export class AddEventPage {
   }
 
   add() {
-    if (!this.title)
-      return this.error = 'Title required';
+    if (!this.title) return this.error = 'Title required';
+    if (!this.category) return this.error = 'Category required';
+    if (!this.location) return this.error = 'Location required';
 
-    if (!this.category)
-      return this.error = 'Category required';
-
-    if (!this.location)
-      return this.error = 'Location required';
+    const startTime = new Date(this.startTime);
+    const endTime = new Date(this.endTime);
 
     this.viewCtrl.dismiss({
       title: this.title,
-      startTime: new Date(this.startTime).toString(),
-      endTime: new Date(this.endTime).toString(),
+      startTime: new Date(
+        startTime.getFullYear(),
+        startTime.getMonth(),
+        startTime.getDate(),
+        startTime.getHours(),
+        startTime.getMinutes() + startTime.getTimezoneOffset()
+      ).toISOString(),
+      endTime: new Date(
+        endTime.getFullYear(),
+        endTime.getMonth(),
+        endTime.getDate(),
+        endTime.getHours(),
+        endTime.getMinutes() + endTime.getTimezoneOffset()
+      ).toISOString(),
       allDay: this.allDay,
       category: this.category,
       subCategory: this.subCategory,
