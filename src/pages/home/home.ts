@@ -28,22 +28,22 @@ export class HomePage {
   eventsObservable: FirebaseListObservable<any[]>;
   events: Event[] = [];
   categories: Category[] = [
-    { name: 'Sports', selected: true },
-    { name: 'Religion', selected: true },
-    { name: 'LGBT', selected: true },
-    { name: 'Live Music', selected: true },
-    { name: 'Performing Arts', selected: true },
-    { name: 'Visual Arts', selected: true },
-    { name: 'Children', selected: true },
-    { name: 'Fitness', selected: true },
-    { name: 'Literature', selected: true },
-    { name: 'Aerospace', selected: true },
-    { name: 'History', selected: true },
-    { name: 'DJs', selected: true },
-    { name: 'Karaoke', selected: true },
-    { name: 'Parks & Recreation', selected: true },
-    { name: 'Libraries', selected: true },
-    { name: 'Festivals/Fairs', selected: true }
+    { name: 'Sports', selected: true, color: 'red' },
+    { name: 'Religion', selected: true, color: 'blue' },
+    { name: 'LGBT', selected: true, color: 'green' },
+    { name: 'Live Music', selected: true, color: 'yellow' },
+    { name: 'Performing Arts', selected: true, color: 'red' },
+    { name: 'Visual Arts', selected: true, color: 'red' },
+    { name: 'Children', selected: true, color: 'red' },
+    { name: 'Fitness', selected: true, color: 'red' },
+    { name: 'Literature', selected: true, color: 'red' },
+    { name: 'Aerospace', selected: true, color: 'red' },
+    { name: 'History', selected: true, color: 'red' },
+    { name: 'DJs', selected: true, color: 'red' },
+    { name: 'Karaoke', selected: true, color: 'red' },
+    { name: 'Parks & Recreation', selected: true, color: 'red' },
+    { name: 'Libraries', selected: true, color: 'red' },
+    { name: 'Festivals/Fairs', selected: true, color: 'red' }
   ];
 
   constructor(
@@ -70,6 +70,15 @@ export class HomePage {
       }));
 
       this.applyFilter();
+    });
+  }
+
+  getEvents(date: Date) {
+    return this.eventSource.map(event => {
+      const newEvent: any = event;
+      const category = this.categories.find(category => category.name === event.category);
+      if (category) newEvent.color = category.color;
+      return newEvent;
     });
   }
 
