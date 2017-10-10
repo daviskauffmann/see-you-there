@@ -80,9 +80,16 @@ th {
 }
 
 // Calendar - Day-view
-.dayview-allday-label,
-.calendar-hour-column {
-  width: 80px !important; //fix
+dayview.dayview {
+  .dayview-allday-label,
+  .calendar-hour-column {
+    width: 8rem; //80px
+  }
+
+  .calendar-event-inner[_ngcontent-c0] {
+    font-size: inherit;
+    line-height: inherit;
+  }
 }
 
 td.calendar-hour-column.text-center {
@@ -103,16 +110,14 @@ td.calendar-hour-column.text-center {
     color: #fff;
     font-size: 1.5rem;
     font-weight: 500;
-    padding-top: 15px; // display: inline-block;
-    // vertical-align: middle;
-    // line-height: normal;
+    padding: 1.25rem 0; //15px
+    display: table-cell;
+    vertical-align: middle;
+    line-height: normal;
   }
 }
 
-.calendar-event-inner[_ngcontent-c0] {
-  // font-size: 1.5rem;
-  // line-height: normal;
-}
+
 
 // Calendar - Week-view
 // Calendar - Month-view
@@ -166,4 +171,9 @@ table.table.table-fixed.monthview-datetable {
 
 ion-fab ion-icon {
   color: #fff;
+}
+
+// Menu - only organizers see this
+ion-menu ion-icon {
+  color: map-get($colors, secondary)
 }

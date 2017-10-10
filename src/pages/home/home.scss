@@ -3,15 +3,28 @@ page-home {
     position: fixed;
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: -1;
     background-image: url(../assets/img/logo-watermark.svg);
     background-repeat:no-repeat;
     left: 0;
     top: 30vh;
   }
 
-  .item-md {
-    background-color: transparent;
+  .event-detail-container {
+    .item-md { // don't apply to "No events"
+      background-color: map-get($colors, cat3); //connect event cat to color automatically
+      color: #fff;
+      margin-bottom: 1rem;
+
+      &:first-child {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+
+  ion-icon.icon.icon-md.ion-md-add {
+    font-weight: 600;
   }
 }
 
