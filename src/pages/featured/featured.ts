@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { Owner } from '../../models/owner';
+import { Organizer } from '../../models/organizer';
 
 @IonicPage()
 @Component({
@@ -9,7 +9,7 @@ import { Owner } from '../../models/owner';
   templateUrl: 'featured.html',
 })
 export class FeaturedPage {
-  owners: Owner[] = [
+  owners: Organizer[] = [
     {
       id: '0',
       name: 'Advertiser Name',

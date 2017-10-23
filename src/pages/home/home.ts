@@ -57,7 +57,7 @@ export class HomePage {
     this.eventsObservable.subscribe(records => {
       this.events = records.map(record => ({
         id: record.$key,
-        ownerId: record.ownerId,
+        organizerId: record.ownerId,
         title: record.title,
         startTime: new Date(record.startTime),
         endTime: new Date(record.endTime),

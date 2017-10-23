@@ -16,5 +16,7 @@ export class EventPage {
     public navParams: NavParams) {
 
     this.event = this.navParams.data;
+
+    console.log(this.event);
   }
 }

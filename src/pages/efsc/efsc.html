@@ -39,6 +39,8 @@
 
 <ion-content>
 
+  <div class="logo-overlay"></div>
+
   <calendar preserveScrollPosition="true" [lockSwipeToPrev]="lockSwipeToPrev" [calendarMode]="calendarMode" [currentDate]="currentDate"
     [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
     (onTimeSelected)="onTimeSelected($event)" allDayLabel="All-Day"></calendar>

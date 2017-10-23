@@ -1,6 +1,6 @@
 export class Event {
   id: string;
-  ownerId: string;
+  organizerId: string;
   title: string;
   startTime: Date;
   endTime: Date;
