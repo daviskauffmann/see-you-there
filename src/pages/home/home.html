@@ -32,13 +32,15 @@
 <ion-content>
 
   <ion-fab bottom right>
-    <button ion-fab mini (click)="addEvent()"><ion-icon name="add"></ion-icon></button>
+    <button ion-fab mini (click)="addEvent()">
+      <ion-icon name="add"></ion-icon>
+    </button>
   </ion-fab>
 
   <div class="logo-overlay"></div>
 
-  <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [lockSwipeToPrev]="lockSwipeToPrev" [calendarMode]="calendarMode"
-    [currentDate]="currentDate" [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
-    (onEventSelected)="onEventSelected($event)" (onTimeSelected)="onTimeSelected($event)" (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
+  <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate"
+    [eventSource]="events.getFilteredEvents()" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
 
 </ion-content>

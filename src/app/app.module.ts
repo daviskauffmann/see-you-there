@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { NgCalendarModule } from 'ionic2-calendar';
+import { EventsProvider } from '../providers/events/events';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyC313ovfR83k7pQjoBpKf8HFG6_wAQ8nLw',
@@ -36,7 +37,8 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    EventsProvider
   ]
 })
 export class AppModule { }

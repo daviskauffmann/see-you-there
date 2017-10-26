@@ -8,12 +8,14 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class AddEventPage {
   title: string = '';
+  startDate: string = new Date().toISOString();
   startTime: string = new Date().toISOString();
+  endDate: string = new Date().toISOString();
   endTime: string = new Date().toISOString();
   allDay: boolean = false;
   category: string = '';
-  subCategory: string = '';
   location: string;
+
   error: string;
 
   constructor(
@@ -30,28 +32,29 @@ export class AddEventPage {
     if (!this.category) return this.error = 'Category required';
     if (!this.location) return this.error = 'Location required';
 
+    const startDate = new Date(this.startDate);
     const startTime = new Date(this.startTime);
+    const endDate = new Date(this.endDate);
     const endTime = new Date(this.endTime);
 
     this.viewCtrl.dismiss({
       title: this.title,
       startTime: new Date(
-        startTime.getFullYear(),
-        startTime.getMonth(),
-        startTime.getDate(),
+        startDate.getFullYear(),
+        startDate.getMonth(),
+        startDate.getDate(),
         startTime.getHours(),
         startTime.getMinutes() + startTime.getTimezoneOffset()
       ).toISOString(),
       endTime: new Date(
-        endTime.getFullYear(),
-        endTime.getMonth(),
-        endTime.getDate(),
+        endDate.getFullYear(),
+        endDate.getMonth(),
+        endDate.getDate(),
         endTime.getHours(),
         endTime.getMinutes() + endTime.getTimezoneOffset()
       ).toISOString(),
       allDay: this.allDay,
       category: this.category,
-      subCategory: this.subCategory,
       location: this.location
     });
   }

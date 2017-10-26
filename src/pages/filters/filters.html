@@ -25,7 +25,7 @@
 
   <ion-list>
 
-    <ion-item *ngFor="let category of categories">
+    <ion-item *ngFor="let category of events.getCategories()">
       <ion-label>{{ category.name }}</ion-label>
       <ion-checkbox [(ngModel)]="category.selected"></ion-checkbox>
     </ion-item>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 
-import { Category } from '../../models/category';
+import { EventsProvider } from '../../providers/events/events';
 
 @IonicPage()
 @Component({
@@ -9,37 +9,27 @@ import { Category } from '../../models/category';
   templateUrl: 'filters.html',
 })
 export class FiltersPage {
-  categories: Category[];
-
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public viewCtrl: ViewController) {
-
-    this.categories = this.navParams.data;
-
-    this.categories.sort((a, b) => a.name < b.name
-      ? -1
-      : a.name > b.name
-        ? 1
-        : 0);
-  }
+    public viewCtrl: ViewController,
+    public events: EventsProvider) { }
 
   done() {
     this.viewCtrl.dismiss();
   }
 
   getToggleText() {
-    return this.categories.every(category => category.selected)
+    return this.events.getCategories().every(category => category.selected)
       ? 'Unselect All'
       : 'Select All';
   }
 
   toggle() {
-    if (this.categories.every(category => category.selected)) {
-      this.categories.forEach(category => category.selected = false);
+    if (this.events.getCategories().every(category => category.selected)) {
+      this.events.getCategories().forEach(category => category.selected = false);
     } else {
-      this.categories.forEach(category => category.selected = true);
+      this.events.getCategories().forEach(category => category.selected = true);
     }
   }
 }

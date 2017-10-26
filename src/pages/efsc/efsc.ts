@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { EventsProvider } from '../../providers/events/events';
 
 import { Event } from '../../models/event';
-import { Category } from '../../models/category';
 
 @IonicPage()
 @Component({
@@ -13,70 +12,23 @@ import { Category } from '../../models/category';
 })
 export class EfscPage {
   title: string = 'EFSC Events';
-  eventSource: Event[] = [];
   calendarMode: string = 'day';
   currentDate: Date = new Date();
   selectedDate: Date = new Date();
   step: number = 15;
   lockSwipeToPrev = false;
+  dateFormatter = {
+    formatDayViewTitle: (date: Date) => {
+      return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getDate()}`;
+    }
+  };
   weekday: string = '';
-
-  eventsObservable: FirebaseListObservable<any[]>;
-  events: Event[] = [];
-  categories: Category[] = [
-    { name: 'Sports', selected: true },
-    { name: 'Religion', selected: true },
-    { name: 'LGBT', selected: true },
-    { name: 'Live Music', selected: true },
-    { name: 'Performing Arts', selected: true },
-    { name: 'Visual Arts', selected: true },
-    { name: 'Children', selected: true },
-    { name: 'Fitness', selected: true },
-    { name: 'Literature', selected: true },
-    { name: 'Aerospace', selected: true },
-    { name: 'History', selected: true },
-    { name: 'DJs', selected: true },
-    { name: 'Karaoke', selected: true },
-    { name: 'Parks & Recreation', selected: true },
-    { name: 'Libraries', selected: true },
-    { name: 'Festivals/Fairs', selected: true }
-  ];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     public modalCtrl: ModalController,
-    public afDB: AngularFireDatabase) {
-
-    this.eventsObservable = this.afDB.list('/events');
-
-    this.eventsObservable.subscribe(records => {
-      this.events = records.map(record => ({
-        id: record.$key,
-        organizerId: record.ownerId,
-        title: record.title,
-        startTime: new Date(record.startTime),
-        endTime: new Date(record.endTime),
-        allDay: record.allDay,
-        category: record.category,
-        subCategory: record.subCategory,
-        location: record.location,
-        description: record.description,
-        imageUrl: record.imageUrl
-      }));
-
-      this.applyFilter();
-    });
-  }
-
-  applyFilter() {
-    this.eventSource = this.events.filter(event => {
-      const category = this.categories.find(category => category.name === event.category);
-      return category
-        ? category.selected
-        : true;
-    });
-  }
+    public events: EventsProvider) { }
 
   addEvent() {
     let modal = this.modalCtrl.create('AddEventPage');
@@ -84,40 +36,16 @@ export class EfscPage {
     modal.onDidDismiss(data => {
       if (!data) return;
 
-      this.eventsObservable.push(data);
+      this.events.addEvent(data);
     });
 
     modal.present();
   }
 
   showFilters() {
-    let modal = this.modalCtrl.create('FiltersPage', this.categories);
-
-    modal.onDidDismiss(() => {
-      this.applyFilter();
-    });
+    let modal = this.modalCtrl.create('FiltersPage');
 
     modal.present();
-  }
-
-  calcSwipe(date: Date) {
-    /*var today = new Date();
-    today.setHours(0, 0, 0, 0);
-    date.setHours(0, 0, 0, 0);
-
-    if (this.calendarMode === 'day') {
-      if (date <= today) {
-        this.lockSwipeToPrev = true;
-      } else {
-        this.lockSwipeToPrev = false;
-      }
-    } else {
-      this.lockSwipeToPrev = false;
-    }*/
-  }
-
-  onTimeSelected(ev: { selectedTime: Date, events: any[] }) {
-    this.calcSwipe(ev.selectedTime);
   }
 
   onTitleChanged(title: string) {
@@ -130,13 +58,5 @@ export class EfscPage {
 
   onCurrentDateChanged(date: Date) {
     this.selectedDate = date;
-
-    this.calcSwipe(date);
   }
-
-  markDisabled(date: Date) {
-    var current = new Date();
-    current.setHours(0, 0, 0, 0);
-    return date < current;
-  };
 }
