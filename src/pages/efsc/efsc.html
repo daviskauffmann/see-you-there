@@ -23,13 +23,13 @@
 
     <ion-segment [(ngModel)]="weekday">
 
-      <ion-segment-button value="sun">S</ion-segment-button>
-      <ion-segment-button value="m">M</ion-segment-button>
-      <ion-segment-button value="t">T</ion-segment-button>
-      <ion-segment-button value="w">W</ion-segment-button>
-      <ion-segment-button value="r">R</ion-segment-button>
-      <ion-segment-button value="f">F</ion-segment-button>
-      <ion-segment-button value="sat">S</ion-segment-button>
+      <ion-segment-button value="sun">S {{ getWeekday().sunday }}</ion-segment-button>
+      <ion-segment-button value="m">M {{ getWeekday().monday }}</ion-segment-button>
+      <ion-segment-button value="t">T {{ getWeekday().tuesday }}</ion-segment-button>
+      <ion-segment-button value="w">W {{ getWeekday().wednesday }}</ion-segment-button>
+      <ion-segment-button value="r">R {{ getWeekday().thursday }}</ion-segment-button>
+      <ion-segment-button value="f">F {{ getWeekday().friday }}</ion-segment-button>
+      <ion-segment-button value="sat">S {{ getWeekday().saturday }}</ion-segment-button>
 
     </ion-segment>
 
@@ -41,7 +41,8 @@
 
   <div class="logo-overlay"></div>
 
-  <calendar preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate" [eventSource]="events.getFilteredEvents()"
-    [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" allDayLabel="All-Day"></calendar>
+  <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate"
+    [eventSource]="events.getFilteredEvents()" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
 
 </ion-content>

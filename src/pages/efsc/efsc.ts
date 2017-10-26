@@ -19,7 +19,7 @@ export class EfscPage {
   lockSwipeToPrev = false;
   dateFormatter = {
     formatDayViewTitle: (date: Date) => {
-      return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getDate()}`;
+      return `${date.toLocaleString('en-us', { month: 'long' })}`;
     }
   };
   weekday: string = '';
@@ -58,5 +58,30 @@ export class EfscPage {
 
   onCurrentDateChanged(date: Date) {
     this.selectedDate = date;
+
+    switch (date.getDay()) {
+      case 0: this.weekday = 'sun'; break;
+      case 1: this.weekday = 'm'; break;
+      case 2: this.weekday = 't'; break;
+      case 3: this.weekday = 'w'; break;
+      case 4: this.weekday = 'r'; break;
+      case 5: this.weekday = 'f'; break;
+      case 6: this.weekday = 'sat'; break;
+    }
+  }
+
+  getWeekday() {
+    const today = this.selectedDate;
+    const day = today.getDay();
+
+    return {
+      sunday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day).getDate(),
+      monday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 1).getDate(),
+      tuesday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 2).getDate(),
+      wednesday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 3).getDate(),
+      thursday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 4).getDate(),
+      friday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 5).getDate(),
+      saturday: new Date(today.getFullYear(), today.getMonth(), today.getDate() - day + 6).getDate(),
+    };
   }
 }
