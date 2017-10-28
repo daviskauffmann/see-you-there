@@ -1,51 +1,74 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title>{{ event.title }}</ion-title>
+    <ion-buttons end><!-- add functionality to share & bookmark buttons -->
+      <button ion-button icon-only>
+        <ion-icon name="bookmark"></ion-icon>
+      </button>
+      <button ion-button icon-only>
+        <ion-icon name="share"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 <ion-content padding>
 
-  <ion-card>
+  <div class="category">{{ event.category }}</div>
+  <h1 class="event-title" text-wrap>{{ event.title }}</h1>
 
-    <img *ngIf="event.imageUrl" [src]="event.imageUrl" />
+  <!-- p *ngIf="event.subCategory">{{ event.subCategory }}</p -->
 
-    <ion-card-header>
-      <h1 text-wrap>{{ event.title }}</h1>
-      <p>{{ event.category }}</p>
-      <p *ngIf="event.subCategory">{{ event.subCategory }}</p>
-    </ion-card-header>
+  <ul>
+    <li>
+      <div class="figure-icon">
+        <ion-icon name="time"></ion-icon>
+      </div>
 
-    <ion-card-content>
-      <p>{{ event.description }}</p>
-    </ion-card-content>
+      <div class="figure-content">
+        <!-- add logic for all day or multiple day events -->
+        <span class="time-header">{{ event.startTime | date:"EEEE, MMMM d, y" }}</span>
+        <br> {{ event.startTime | date:"h:m a" }} to {{ event.endTime | date:"h:m a" }}
+      </div>
 
-  </ion-card>
+    </li>
 
-  <ion-card>
+    <li>
+      <div class="figure-icon">
+        <ion-icon name="pin"></ion-icon>
+      </div>
+      <div class="figure-content">
+        <!-- add the two links to map below -->
+        <span class="location-name">
+          <a href="map">{{ event.location.name }}</a>
+        </span>
+        <br>
+        <span class="location-address">{{ event.location.address }}</span>
+        <br>
+        <span class="location-description">{{ event.location.description }}</span>
+      </div>
+    </li>
 
-    <ion-card-header>
-      <h1>Time</h1>
-    </ion-card-header>
+    <li>
 
-    <ion-card-content>
-      <p>{{ event.startTime | date:"yMdjm" }}</p>
-      <p>{{ event.endTime | date:"yMdjm" }}</p>
-    </ion-card-content>
+      <div class="figure-icon">
+        <ion-icon name="person"></ion-icon>
+      </div>
+      <div class="figure-content">
+        <!-- to add functionality -->
+        Hosted by
+        <a href="">Central Florida Freethought Community</a>
+      </div>
 
-  </ion-card>
+    </li>
 
-  <ion-card>
+  </ul>
 
-    <ion-card-header>
-      <h1>Location</h1>
-      <p>{{ event.location }}</p>
-    </ion-card-header>
+  <img *ngIf="event.imageUrl" [src]="event.imageUrl" class="event-image" />
 
-    <ion-card-content><!-- MAP --></ion-card-content>
+  <div [innerHTML]="event.description" class="event-description"></div>
+  <!-- location map thumbnail and link to outgoing link to user's map app -->
 
-  </ion-card>
 
 </ion-content>

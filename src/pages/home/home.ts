@@ -43,7 +43,8 @@ export class HomePage {
     { name: 'Karaoke', selected: true },
     { name: 'Parks & Recreation', selected: true },
     { name: 'Libraries', selected: true },
-    { name: 'Festivals/Fairs', selected: true }
+    { name: 'Festivals/Fairs', selected: true },
+    { name: 'Discussion', selected: true }
   ];
 
   constructor(
