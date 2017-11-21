@@ -16,17 +16,6 @@
 
   </ion-navbar>
 
-  <ion-toolbar class="cal-segment">
-
-    <ion-segment [(ngModel)]="calendarMode">
-
-      <ion-segment-button value="day">Day</ion-segment-button>
-      <ion-segment-button value="month">Month</ion-segment-button>
-
-    </ion-segment>
-
-  </ion-toolbar>
-
 </ion-header>
 
 <ion-content>
@@ -39,10 +28,18 @@
 
   <div class="logo-overlay"></div>
 
+  <template #template let-showEventDetail="showEventDetail" let-selectedDate="selectedDate" let-noEventsLabel="noEventsLabel">
+    <ion-list>
+      <ion-item *ngFor="let event of selectedDate.events" (click)="onEventSelected(event)">
+        {{ event.title }}
+      </ion-item>
+    </ion-list>
+  </template>
+
   <!-- OVERRIDE. 1. Change times shown under the month-view to 12-hour clock with AM and PM. And if event is at 3:00, remove the zeros. ie: "3 PM - 4 PM" or "3PM - 3:45PM"
                  2. Change format from a single line to an unordered list, with event title, organizer, time, and bookmark outline icon to the right. -->
-  <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate"
-    [eventSource]="events.getFilteredEvents()" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
-    (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
+  <calendar [monthviewEventDetailTemplate]="template" [dateFormatter]="dateFormatter" calendarMode="month"
+    [currentDate]="currentDate" [eventSource]="events.getFilteredEvents()" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
 
 </ion-content>

@@ -10,17 +10,17 @@ page-home {
     top: 30vh;
   }
 
-  .event-detail-container {
-    .item-md { // don't apply to "No events"
-      background-color: map-get($colors, cat3); //connect event cat to color automatically
-      color: #fff;
-      margin-bottom: 1rem;
+  // .event-detail-container {
+  //   .item-md { // don't apply to "No events"
+  //     background-color: map-get($colors, cat3); //connect event cat to color automatically
+  //     color: #fff;
+  //     margin-bottom: 1rem;
 
-      &:first-child {
-        margin-top: 1rem;
-      }
-    }
-  }
+  //     &:first-child {
+  //       margin-top: 1rem;
+  //     }
+  //   }
+  // }
 
 
   ion-icon.icon.icon-md.ion-md-add {
