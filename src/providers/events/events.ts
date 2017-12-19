@@ -46,57 +46,57 @@ export class EventsProvider {
     this.eventsObservable = this.afDB.list('/events');
     this.organizersObservable = this.afDB.list('/organizer');
 
-    // this.eventsObservable.subscribe(records => {
-    //   this.events = records.map(record => ({
-    //     id: record.$key,
-    //     organizerId: record.ownerId,
-    //     title: record.title,
-    //     startTime: new Date(record.startTime),
-    //     endTime: new Date(record.endTime),
-    //     allDay: record.allDay,
-    //     category: record.category,
-    //     subCategory: record.subCategory,
-    //     location: record.location,
-    //     description: record.description,
-    //     imageUrl: record.imageUrl
-    //   }));
-    // });
+    this.eventsObservable.subscribe(records => {
+      this.events = records.map(record => ({
+        id: record.$key,
+        organizerId: record.ownerId,
+        title: record.title,
+        startTime: new Date(record.startTime),
+        endTime: new Date(record.endTime),
+        allDay: record.allDay,
+        category: record.category,
+        subCategory: record.subCategory,
+        location: record.location,
+        description: record.description,
+        imageUrl: record.imageUrl
+      }));
+    });
 
     this.organizersObservable.subscribe(records => {
       this.organizers = records.map(record => record);
     });
 
-    const req = `${this.eventfulBaseUri}/${this.eventfulEndpoint}?` +
-      `date=Future&` +
-      `change_multi_day_start=true` +
-      `location=Melbourne,FL&` +
-      `page_size=250&` +
-      `app_key=${this.eventfulApiKey}`;
-    this.http.get(req)
-      .map(res => res.json())
-      .subscribe(res => {
-        console.log(res);
+    // const req = `${this.eventfulBaseUri}/${this.eventfulEndpoint}?` +
+    //   `date=Future&` +
+    //   `change_multi_day_start=true` +
+    //   `location=Melbourne,FL&` +
+    //   `page_size=250&` +
+    //   `app_key=${this.eventfulApiKey}`;
+    // this.http.get(req)
+    //   .map(res => res.json())
+    //   .subscribe(res => {
+    //     console.log(res);
 
-        this.events = res.events.event.map((event: any) => ({
-          id: event.id,
-          organizerId: event.owner,
-          title: event.title,
-          startTime: event.start_time ? new Date(event.start_time) : new Date(),
-          endTime: event.stop_time ? new Date(event.stop_time) : new Date(),
-          allDay: false,
-          category: '',
-          subCategory: '',
-          location: {
-            name: event.venue_name,
-            address: event.venue_address,
-            description: ''
-          },
-          description: event.description,
-          imageUrl: event.image && event.image.url
-        }));
+    //     this.events = res.events.event.map((event: any) => ({
+    //       id: event.id,
+    //       organizerId: event.owner,
+    //       title: event.title,
+    //       startTime: event.start_time ? new Date(event.start_time) : new Date(),
+    //       endTime: event.stop_time ? new Date(event.stop_time) : new Date(),
+    //       allDay: false,
+    //       category: '',
+    //       subCategory: '',
+    //       location: {
+    //         name: event.venue_name,
+    //         address: event.venue_address,
+    //         description: ''
+    //       },
+    //       description: event.description,
+    //       imageUrl: event.image && event.image.url
+    //     }));
 
-        console.log(this.events);
-      });
+    //     console.log(this.events);
+    //   });
   }
 
   getEvents(category?: string, organizerId?: string) {
