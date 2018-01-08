@@ -15,12 +15,12 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { EventsProvider } from '../providers/events/events';
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyC313ovfR83k7pQjoBpKf8HFG6_wAQ8nLw',
-  authDomain: 'see-you-there-2255a.firebaseapp.com',
-  databaseURL: 'https://see-you-there-2255a.firebaseio.com',
-  projectId: 'see-you-there-2255a',
-  storageBucket: 'see-you-there-2255a.appspot.com',
-  messagingSenderId: '1019879395510'
+  apiKey: "AIzaSyA9ZgbQGxGF6ZZ__gXz5tUdAhdSYQn2GN0",
+  authDomain: "see-you-827f6.firebaseapp.com",
+  databaseURL: "https://see-you-827f6.firebaseio.com",
+  projectId: "see-you-827f6",
+  storageBucket: "see-you-827f6.appspot.com",
+  messagingSenderId: "1089579837851"
 };
 
 @NgModule({
