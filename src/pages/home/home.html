@@ -31,14 +31,14 @@
 
 <ion-content>
 
-  <ion-fab bottom right>
+  <!--ion-fab bottom right>
     <button ion-fab mini (click)="addEvent()">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab-->
 
   <div class="logo-overlay"></div>
-
+  
   <!-- OVERRIDE. 1. Change times shown under the month-view to 12-hour clock with AM and PM. And if event is at 3:00, remove the zeros. ie: "3 PM - 4 PM" or "3PM - 3:45PM"
                  2. Change format from a single line to an unordered list, with event title, organizer, time, and bookmark outline icon to the right. -->
   <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate"
