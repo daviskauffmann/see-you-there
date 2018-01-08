@@ -39,10 +39,10 @@
 
 <ion-content>
 
-  <div class="logo-overlay"></div>
+  <!--div class="logo-overlay"></div-->
 
   <calendar [dateFormatter]="dateFormatter" preserveScrollPosition="true" [calendarMode]="calendarMode" [currentDate]="currentDate"
-    [eventSource]="events.getFilteredEvents()" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
+    [eventSource]="[]" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)"
     (onTitleChanged)="onTitleChanged($event)" allDayLabel="All-Day"></calendar>
 
 </ion-content>
