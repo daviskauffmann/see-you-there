@@ -6,7 +6,7 @@ Install [NPM](https://www.npmjs.com/)
 
 ```
 npm install ionic cordova -g
-git clone https://github.com/daviskauffmann/see-you-there.git
+git clone https://github.com/see-you-there/see-you-there.git
 cd see-you-there
 npm install
 ```
