@@ -110,4 +110,10 @@ export class HomePage {
   onCurrentDateChanged(date: Date) {
     this.selectedDate = date;
   }
+
+  isDateDisabled(date: Date) {
+    var currentDate = new Date();
+    currentDate.setHours(0, 0, 0);
+    return date <= currentDate;
+  };
 }

@@ -34,7 +34,7 @@
 
 <ion-content>
 
-  <calendar [calendarMode]="calendarMode" [currentDate]="currentDate" [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
+  <calendar (isDateDisabled)="isDateDisabled(date)" [calendarMode]="calendarMode" [currentDate]="currentDate" [eventSource]="eventSource" [step]="step" (onCurrentDateChanged)="onCurrentDateChanged($event)"
     (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onTitleChanged($event)"></calendar>
 
 </ion-content>
