@@ -40,6 +40,7 @@ export const firebaseConfig = {
   providers: [
     StatusBar,
     SplashScreen,
+    Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     EventsProvider
   ]
