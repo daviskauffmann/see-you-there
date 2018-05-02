@@ -26,16 +26,14 @@ export class EventPage {
     private geolocation: Geolocation) {
 
       this.event = this.navParams.data;
-
-    // console.log(this.event);
   }
 
   ionViewDidLoad() {
     console.log('beans beans beans');
     this.geolocation.getCurrentPosition({
-      enableHighAccuracy: true, 
+      enableHighAccuracy: false, 
       timeout: 10000, 
-      maximumAge: 10000
+      maximumAge: 15000
     }).then((resp) => {
       console.log('got position!');
       this.loadMap(resp.coords.latitude, resp.coords.longitude);
@@ -60,6 +58,7 @@ export class EventPage {
       position: this.map.getCenter(),
       fullscreenControl: false
     });
+    // hack to prevent warnings
     console.log(marker);
   }
 }
