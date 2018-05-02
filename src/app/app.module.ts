@@ -13,6 +13,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { NgCalendarModule } from 'ionic2-calendar';
 import { EventsProvider } from '../providers/events/events';
+import { Geolocation } from '@ionic-native/geolocation';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyA9ZgbQGxGF6ZZ__gXz5tUdAhdSYQn2GN0',
