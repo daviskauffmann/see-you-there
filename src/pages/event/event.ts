@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Event } from '../../models/event';
 import { Geolocation } from '@ionic-native/geolocation';
-import { GESTURE_PRIORITY_TOGGLE } from 'ionic-angular/gestures/gesture-controller';
+// import { GESTURE_PRIORITY_TOGGLE } from 'ionic-angular/gestures/gesture-controller';
 
 // hack to prevent errors
 declare var google: any;
@@ -31,8 +31,8 @@ export class EventPage {
   ionViewDidLoad() {
     console.log('beans beans beans');
     this.geolocation.getCurrentPosition({
-      enableHighAccuracy: false, 
-      timeout: 10000, 
+      enableHighAccuracy: false,
+      timeout: 10000,
       maximumAge: 15000
     }).then((resp) => {
       console.log('got position!');
