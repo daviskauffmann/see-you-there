@@ -24,6 +24,7 @@ export class EventPage {
   map: any;
   event: Event;
   geoWatch: any;
+  mapMarker: any;
   position: any = { lat: 0.0, lng: 0.0 };
   has_pos: boolean;
 
@@ -32,6 +33,8 @@ export class EventPage {
 
   geocodeURI: string = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   google_key: string = '&key=AIzaSyACIn956WI7_FAS0cZwxHeqod_aK02FzcU';
+  geoURI: string;
+  navURI: string;
 
   constructor(
     public http: Http,
@@ -43,14 +46,17 @@ export class EventPage {
       this.event = this.navParams.data;
       // this.RegisterPositionCallback(geolocation);
       console.log(JSON.stringify(this.event));
+      // build map URI
+      this.geoURI = this.geocodeURI 
+        + this.event.location.address.replace(/ /g, '+') 
+        + this.google_key;
+      // build nav URI
+      this.navURI = 'http://maps.google.com/maps?daddr=' + this.event.location.address;
   }
 
   ionViewDidLoad() {
-    // build geocode api request uri
-    let uri = this.geocodeURI + this.event.location.address.replace(/ /g, '+') + this.google_key;
-    console.log(uri);
     // hook geocode response
-    this.http.get(uri).map(res => res.json()).subscribe(
+    this.http.get(this.geoURI).map(res => res.json()).subscribe(
       (data) => {
         console.log(JSON.stringify(data));
         if (data.status == 'OK') {
@@ -92,12 +98,15 @@ export class EventPage {
     // build map using api
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    var marker = new google.maps.Marker({
+    this.mapMarker = new google.maps.Marker({
       position: latLng,
       map: this.map,
       title: this.event.location.name
     });
-    console.log(marker);
+
+    this.mapMarker.addListener('click', () => {
+
+    });
   }
 
   RegisterPositionCallback(geolocation: Geolocation) {
