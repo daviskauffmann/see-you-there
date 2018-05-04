@@ -4,8 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-// import { auth, User } from 'firebase/app';
-import * as firebase from 'firebase';
+import { auth, User } from 'firebase/app';
 
 @Component({
   templateUrl: 'app.html'
@@ -25,15 +24,6 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       // splashScreen.hide();
-      let config = {
-        apiKey: 'AIzaSyA9ZgbQGxGF6ZZ__gXz5tUdAhdSYQn2GN0',
-        authDomain: 'see-you-827f6.firebaseapp.com',
-        databaseURL: 'https://see-you-827f6.firebaseio.com',
-        projectId: 'see-you-827f6',
-        storageBucket: 'see-you-827f6.appspot.com',
-        messagingSenderId: '1089579837851'
-      };
-      firebase.initializeApp(config);
     });
   }
 
@@ -121,7 +111,7 @@ export class MyApp {
             }
 
             this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
-              .then((user: firebase.User) => {
+              .then((user: User) => {
                 user.updateProfile({
                   displayName: data.displayName,
                   photoURL: ''
@@ -186,8 +176,8 @@ export class MyApp {
               return;
             }
 
-            this.afAuth.auth.currentUser.linkWithCredential(firebase.auth.EmailAuthProvider.credential(data.email, data.password))
-              .then((user: firebase.User) => {
+            this.afAuth.auth.currentUser.linkWithCredential(auth.EmailAuthProvider.credential(data.email, data.password))
+              .then((user: User) => {
                 user.updateProfile({
                   displayName: data.displayName,
                   photoURL: ''
