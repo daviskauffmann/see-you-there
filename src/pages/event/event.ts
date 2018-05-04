@@ -6,6 +6,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 // needed to access google API for geocoding
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
+// firebase support for chat
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 // import { GESTURE_PRIORITY_TOGGLE } from 'ionic-angular/gestures/gesture-controller';
 
 // hack to prevent TypeScript errors
@@ -36,10 +38,14 @@ export class EventPage {
   geoURI: string;
   navURI: string;
 
+  // messages: FirebaseListObservable<any[]>;
+  messages: any = [];
+
   constructor(
     public http: Http,
     public navCtrl: NavController,
     public navParams: NavParams,
+    public afd: AngularFireDatabase,
     private geolocation: Geolocation) {
 
       // assign data carried over from firebase
@@ -52,6 +58,15 @@ export class EventPage {
         + this.google_key;
       // build nav URI
       this.navURI = 'http://maps.google.com/maps?daddr=' + this.event.location.address;
+      // get messages
+      this.getMessages();
+  }
+
+  getMessages()
+  {
+    this.messages = ['OhhhSNAP!','Turn down for what?','You know that\'s right','xD','lol!'];
+    //afd.list()
+    
   }
 
   ionViewDidLoad() {

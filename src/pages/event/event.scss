@@ -80,4 +80,12 @@ page-event {
     width: 100%;
     height: 100%;
   }
+
+  #chatscroll {
+    width: 100%;
+    height: 120px;
+    ion-item: {
+      width:100%;
+    }
+  }
 }

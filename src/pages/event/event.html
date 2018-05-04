@@ -72,10 +72,17 @@
   <br>
   <div #map id="map"></div>
   <br>
+  <!-- scrolling text live feed here -->
+  <ion-scroll id="chatscroll" scrollX="false" scrollY="true">
+    <ion-item *ngFor="let text of messages">{{ text }}</ion-item>
+  </ion-scroll>
+  <!-- check for ionic/angular examples -->
+  <!-- touch to bring up message send prompt -->
+  <br>
   <ion-item>
     <div class="video-container">
       <!-- <video src="http://polarrecycling.org/yes_awesome.webm" autoplay></video> !-->
-      <iframe src="http://www.youtube.com/embed/HMUDVMiITOU?autoplay=1&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&modestbranding=1&showinfo=0" frameborder="0" width="100%" height="100%"></iframe>
+      <iframe src="http://www.youtube.com/embed/HMUDVMiITOU?autoplay=0&controls=0&disablekb=1&fs=0&iv_load_policy=3&loop=1&modestbranding=1&showinfo=0" frameborder="0" width="100%" height="100%"></iframe>
     </div>
   </ion-item>
 
