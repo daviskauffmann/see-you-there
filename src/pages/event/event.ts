@@ -65,7 +65,7 @@ export class EventPage {
   getMessages()
   {
     this.messages = ['OhhhSNAP!','Turn down for what?','You know that\'s right','xD','lol!'];
-    //afd.list()
+    // afd.list()
     
   }
 
@@ -107,7 +107,7 @@ export class EventPage {
     let latLng = new google.maps.LatLng(this.position.lat, this.position.lng);
     let mapOptions = {
       center: latLng,
-      zoom: 10,
+      zoom: 15,
       animation: google.maps.Animation.DROP
     };
     // build map using api
